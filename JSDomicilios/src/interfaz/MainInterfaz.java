@@ -1,18 +1,10 @@
 package interfaz;
 
-import javax.swing.JFrame;
+public class MainInterfaz {
 
-public class MainInterfaz extends JFrame{
-
-	
-	public MainInterfaz(){
-		
-		
-	}
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 
-		MainInterfaz main = new MainInterfaz();
-		main.setVisible(true);
 	}
 
 }
