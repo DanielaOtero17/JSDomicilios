@@ -1,5 +1,6 @@
 package model;
 
-public class Edge {
+public class Edge<E,T> {
+	
 
 }
