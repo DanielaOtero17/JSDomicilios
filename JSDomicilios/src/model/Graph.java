@@ -213,60 +213,6 @@ public class Graph<E,T>{
 	}
 	
 	
-
-	public Vertex<E,T>[] DFS(Vertex<E,T> vertex){
-		
-		Iterator<Vertex<E,T>> iterV = vertices();
-		while(iterV.hasNext()){
-			Vertex<E,T> currentV = iterV.next();
-			currentV.setStatus(Vertex.UNVISITED);
-			currentV.setColor(Vertex.UNCOLORED);
-		}
-		
-		Iterator<Edge<E,T>> iterE = edges();
-		while(iterE.hasNext())
-			iterE.next().setStatus(Edge.UNDISCOVERED);
-		
-		Auxiliar<Vertex<E,T>> DFS_list = new Auxiliar<>();
-		
-		
-		DFS(vertex, DFS_list);
-		
-		Iterator<Vertex<E,T>> iter_DFS = DFS_list.iterator();
-		Vertex<E,T> DFS[] = new Vertex[iter_DFS.size()];
-		int index = 0;
-		while(iter_DFS.hasNext())
-			DFS[index++] = iter_DFS.next();
-		
-		return DFS;
-	}
-	
-	private void DFS(Vertex<E,T> vertex, Auxiliar<Vertex<E,T>> DFS_list){
-		vertex.setStatus(Vertex.VISITING);
-		DFS_list.addDomicilie(vertex);
-		
-		Iterator<Edge<E,T>> incidentEdges = vertex.getOutEdges();
-		while(incidentEdges.hasNext()){
-			Edge<E,T> edge = incidentEdges.next();
-			Vertex<E,T> oppositeVertex = edge.getV2();
-			
-			// Recur on neighbor if not visited
-			if(oppositeVertex.getStatus() == Vertex.UNVISITED){
-				edge.setStatus(Edge.DISCOVERED);
-				oppositeVertex.setStatus(Vertex.VISITING);
-				DFS(oppositeVertex, DFS_list);
-			}else{
-				
-				/// Mark edge as cross if the undiscovered
-				if(edge.getStatus() == Edge.UNDISCOVERED)
-					edge.setStatus(Edge.CROSS);
-			}
-		}
-		
-		// Mark vertex as visited if more neighbors needs to be visited
-		vertex.setStatus(Vertex.VISITED);
-	}
-	
 	public Iterator<Vertex<E,T>> vertices() {
 		return vertexList.iterator();
 	}

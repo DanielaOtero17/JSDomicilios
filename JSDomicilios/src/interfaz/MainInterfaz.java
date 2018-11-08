@@ -10,12 +10,12 @@ public class MainInterfaz {
 		
 		Graph<String,String> graph = new Graph<String,String>(false);
 		
-		Vertex<String,String> v1 = graph.addVertex("A");	
-		Vertex<String,String> v2 = graph.addVertex("B");
-		Vertex<String,String> v3 = graph.addVertex("C");
-		Vertex<String,String> v4 = graph.addVertex("D");
-		Vertex<String,String> v5 = graph.addVertex("E");
-		Vertex<String,String> v6 = graph.addVertex("F");
+		Vertex<String,String> v1 = graph.addVertex("Domic-1");	
+		Vertex<String,String> v2 = graph.addVertex("Domic-2");
+		Vertex<String,String> v3 = graph.addVertex("Domic-3");
+		Vertex<String,String> v4 = graph.addVertex("Domic-4");
+		Vertex<String,String> v5 = graph.addVertex("Domic-5");
+		Vertex<String,String> v6 = graph.addVertex("Domic-6");
 		
 		graph.addEdge(v1, v4);
 		graph.addEdge(v4, v6);
@@ -23,8 +23,10 @@ public class MainInterfaz {
 		graph.addEdge(v5, v4);
 		graph.addEdge(v1, v3);
 		
-		System.out.println("Print graph state\n");
+		System.out.println("Graph print: \n");
 		System.out.println(graph);
+		
+		System.out.println("Tours in the graph \n");
 		
 		System.out.println("BFS:");
 		for(Vertex<String,String> v : graph.BFS())
