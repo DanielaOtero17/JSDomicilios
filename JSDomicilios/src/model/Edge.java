@@ -82,11 +82,6 @@ public class Edge<E,T> {
 	}
 	
 	
-	public String getStatusString() {
-		String statusString[] = {"Undiscovered","Discovered", "Back", "Forward","Cross"};
-		return statusString[status];
-	}
-	
 	public Domicilie<Edge<E,T>> getIncidentV1() {
 		return incidentV1;
 	}
