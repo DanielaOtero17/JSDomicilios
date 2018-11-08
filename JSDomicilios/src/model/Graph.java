@@ -1,5 +1,5 @@
 package model;
 
-public class Graph {
-
+public class Graph<E,T>{
+	
 }
