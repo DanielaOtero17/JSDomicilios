@@ -27,6 +27,7 @@ public class Edge<E,T> {
 	}
 	
 	public Vertex<E,T> getOpposite(Vertex<E,T> v){
+		
 		if(v != v1 && v != v2)
 			return null;
 		return v1 == v ? v2 : v1;
