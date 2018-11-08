@@ -1,8 +1,5 @@
 package model;
 
-import model.Edge;
-import model.Vertex;
-
 public class Vertex<E,T> implements Comparable<Vertex<E,T>> {
 
 	private E data;
@@ -26,7 +23,11 @@ public class Vertex<E,T> implements Comparable<Vertex<E,T>> {
 	
 	public Vertex(E data, int id){
 		this.data=data;
+		this.status = UNVISITED;
+		this.color = 0;
 		this.id=id;
+		inEdges = new Auxiliar<Edge<E,T>>();
+		outEdges = new Auxiliar<Edge<E,T>>();
 	}
 	
 	public Vertex(E data){
