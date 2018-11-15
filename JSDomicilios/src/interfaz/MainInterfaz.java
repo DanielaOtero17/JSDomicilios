@@ -4,7 +4,33 @@ import model.Edge;
 import model.Vertex;
 import model.Graph;
 
-public class MainInterfaz {
+import java.io.*;
+import javax.swing.*;
+import java.awt.*;
+
+public class MainInterfaz extends JFrame{
+	
+	private ImageIcon icono;
+	private PanelGrafico imagenFondo;
+	public MainInterfaz(){
+		
+		setSize(1000,700);
+		setResizable(false);
+		setTitle("B I E N V I E N V E N I D O ~ J S  D O M I C I L I O S ~ B I E N V E N I D O");
+		
+		icono = new ImageIcon("Imagenes/iconoWakanda.jpg");
+		
+		imagenFondo = new PanelGrafico();		
+		
+		this.setIconImage(icono.getImage());
+		
+		setLayout(new BorderLayout());
+		
+		add(imagenFondo,BorderLayout.CENTER);
+		
+		
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -36,6 +62,8 @@ public class MainInterfaz {
 		for(Vertex<String,String> v : graph.DFS())
 			System.out.print(v + " ");
 
+		MainInterfaz main = new MainInterfaz();
+		main.setVisible(true);
 	}
 
 }
