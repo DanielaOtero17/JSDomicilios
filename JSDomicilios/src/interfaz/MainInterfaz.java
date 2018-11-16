@@ -15,6 +15,7 @@ public class MainInterfaz extends JFrame{
 	private Options_Panel optionsPanel;
 	private Products_Panel productsPanel;
 	public MainInterfaz(){
+		getContentPane().setBackground(Color.WHITE);
 	
 		
 		setSize(1000,700);
@@ -24,15 +25,17 @@ public class MainInterfaz extends JFrame{
 		icono = new ImageIcon("Imagenes/iconoWakanda.jpg");
 		
 		imagenFondo = new PanelGrafico();		
+		imagenFondo.setBackground(Color.WHITE);
 		
 		this.setIconImage(icono.getImage());
 		
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		
-		add(imagenFondo,BorderLayout.CENTER);
+		getContentPane().add(imagenFondo,BorderLayout.CENTER);
 		
 		optionsPanel=new Options_Panel(this);
-		add(optionsPanel, BorderLayout.SOUTH);
+		optionsPanel.setBackground(Color.WHITE);
+		getContentPane().add(optionsPanel, BorderLayout.SOUTH);
 		
 		
 		productsPanel=new Products_Panel(this);

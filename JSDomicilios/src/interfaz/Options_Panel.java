@@ -18,6 +18,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 	private MainInterfaz interfaz;
 	
 	public Options_Panel(MainInterfaz m){
+		setBackground(Color.WHITE);
 		interfaz=m;
 		setBorder(BorderFactory.createTitledBorder("Options"));
 		setLayout(new GridLayout(1,4));

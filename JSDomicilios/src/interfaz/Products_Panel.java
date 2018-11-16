@@ -20,6 +20,7 @@ public class Products_Panel extends JFrame implements ActionListener {
 	private JPanel[][] matPanel;
 	
 	public Products_Panel(MainInterfaz m){
+		setBackground(Color.WHITE);
 		setVisible(false);
 		setResizable(false);
 		String[] data = new String[6];
@@ -28,14 +29,15 @@ public class Products_Panel extends JFrame implements ActionListener {
 		data[2]="P. especial";
 		data[3]="Gaseosa";
 		data[4]="Arroz Chino";
-		data[5]="papitas";
+		data[5]="Papitas";
 		matPanel=new JPanel[HIGH][WIDTH];
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 		butAccept=new JButton("Accept");
 		butAccept.addActionListener(this);
 		butAccept.setActionCommand(ACCEPT);
 		interfaz=m;
 		aux=new JPanel();
+		aux.setBackground(Color.WHITE);
 		aux.setLayout(new GridLayout(HIGH, WIDTH));
 		butsAdd=new JButton[HIGH][WIDTH];
 		labImages=new JLabel[HIGH][WIDTH];
@@ -43,7 +45,7 @@ public class Products_Panel extends JFrame implements ActionListener {
 		for(int i=0; i<HIGH; i++){
 			for(int j=0; j<WIDTH; j++){
 				butsAdd[i][j]=new JButton(data[contador]);
-			butsAdd[i][j].addActionListener(this);
+				butsAdd[i][j].addActionListener(this);
 				butsAdd[i][j].setActionCommand(BUY);
 				
 				labImages[i][j]=new JLabel();

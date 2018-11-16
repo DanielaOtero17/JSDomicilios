@@ -7,6 +7,7 @@ public class PanelGrafico extends JPanel{
 	
 	
 	public PanelGrafico(){
+		setBackground(Color.WHITE);
 		
 		setSize(700,700);
 		
