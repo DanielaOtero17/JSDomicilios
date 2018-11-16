@@ -1,7 +1,10 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
+
 
 public class Graph<E,T>{
 	
@@ -22,7 +25,7 @@ public class Graph<E,T>{
 	}
 	
 	public Vertex<E,T> addVertex(E data){
-		return addVertex(data,0);
+		return addVertex(data,unique_id++);
 	}
 	
 	private Vertex<E,T> addVertex(E data, int id){
@@ -238,6 +241,135 @@ public class Graph<E,T>{
 			tmp[index++] = iter.next();
 		return tmp;
 	}
+	
+
+	public void removeVertex(Vertex<E,T> vertex){
+		
+		Iterator<Edge<E,T>> iterOutEdges = vertex.getOutEdges();
+		while(iterOutEdges.hasNext()){
+			Edge<E,T> currentE = iterOutEdges.next();
+			Vertex<E,T> vTo = currentE.getV2();
+			
+			vTo.removeInEdge(currentE.getIncidentV2());
+			
+			edgeList.remove(currentE.getPosition());
+		}
+		
+		Iterator<Edge<E,T>> iterInEdges = vertex.getInEdges();
+		while(iterInEdges.hasNext()){
+			Edge<E,T> currentE = iterInEdges.next();
+			Vertex<E,T> vFrom = currentE.getV1();
+			
+			vFrom.removeOutEdge(currentE.getIncidentV1());
+			edgeList.remove(currentE.getPosition());
+		}
+		vertexList.remove(vertex.getPosition());
+	}
+	
+	public void removeEdge(Edge<E,T> edge){
+		edge.getV1().removeOutEdge(edge.getIncidentV1());
+		edge.getV2().removeInEdge(edge.getIncidentV2());
+		edgeList.remove(edge.getPosition());
+	}
+	
+	
+	public boolean isDirected() {
+		return directed;
+	}
+	
+	public boolean isCyclic(){
+		DFS();
+		return isCyclic;
+	}
+	
+//	public boolean isConnected(){
+//		if(directed)
+//			BFS_DiGraph_helper();
+//		else
+//			DFS();
+//		return isConnected;
+//	}
+//	
+//	public int connectedComponents(){
+//		if(directed)
+//			BFS_DiGraph_helper();
+//		else
+//			DFS();
+//	}
+	
+
+	public void dijkstra(Vertex<E,T> v){
+		
+		Iterator<Vertex<E,T>> iterV = vertices();
+		while(iterV.hasNext()){
+			Vertex<E,T> currentV = iterV.next();
+			currentV.setStatus(Vertex.UNVISITED);
+			currentV.setDijkstra_value(Double.MAX_VALUE);
+			currentV.setDijkstra_parent(null);
+		}
+		
+		Iterator<Edge<E,T>> iterE = edges();
+		while(iterE.hasNext())
+			iterE.next().setStatus(Edge.UNDISCOVERED);
+		
+		v.setDijkstra_value(0);
+		
+		PriorityQueue<Vertex<E,T>> pq = new PriorityQueue<>();
+		
+		pq.offer(v);
+		v.setStatus(Vertex.VISITING);
+		v.setDijkstra_parent(v);
+		while(!pq.isEmpty()){
+			
+			Vertex<E,T> polled = pq.poll();
+			v.setStatus(Vertex.VISITED);
+			Iterator<Edge<E,T>> incidentEdges = polled.getOutEdges();
+			
+			while(incidentEdges.hasNext()){
+				Edge<E,T> edge = incidentEdges.next();
+				Vertex<E,T> oppositeVertex = edge.getV2();
+				double pathCost = edge.getWeight() + polled.getDijkstra_value();
+				
+				if(oppositeVertex.getStatus() == Vertex.UNVISITED){
+					oppositeVertex.setDijkstra_value(pathCost);
+					oppositeVertex.setDijkstra_edge(edge);
+					edge.setStatus(Edge.DISCOVERED);
+					oppositeVertex.setStatus(Vertex.VISITING);
+					oppositeVertex.setDijkstra_parent(polled);
+					pq.offer(oppositeVertex);
+				
+				}
+				else if(oppositeVertex.getStatus() == Vertex.VISITING){
+					
+					if(oppositeVertex.getDijkstra_value() > pathCost){
+						oppositeVertex.setDijkstra_value(pathCost);
+						edge.setStatus(Edge.DISCOVERED);
+						oppositeVertex.setDijkstra_parent(polled);
+						oppositeVertex.getDijkstra_edge().setStatus(Edge.FORWARD); // Mark previous edge as FORWARD
+						oppositeVertex.setDijkstra_edge(edge); // Update edge that makes it shortest path
+					}
+				}
+			}
+		}
+	}
+	
+	public Edge<E,T>[] dijkstra(Vertex<E,T> vFrom, Vertex<E,T> vTo){
+		this.dijkstra(vFrom);
+		Stack<Edge<E,T>> path = new Stack<>();
+		Vertex<E,T> current = vTo;
+		
+		while(current.getDijkstra_edge() != null){
+			path.push(current.getDijkstra_edge());
+			current = current.getDijkstra_parent();
+		}
+		
+		Edge<E,T>[] edges = new Edge[path.size()];
+		int index =  0;
+		while(!path.isEmpty())
+			edges[index++] = path.pop();
+		return edges;
+	}
+	
 	
 	public String toString(){
 		String output = "Vertices:\n";
