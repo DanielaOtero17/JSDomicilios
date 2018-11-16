@@ -104,5 +104,28 @@ public class Auxiliar <E> {
 			}
 		};
 	}
+	
+
+	public void remove(Domicilie<E> node){		
+		if(head == node){
+			if(size == 1){	
+				head = null;
+			}
+			else{		
+				node.getNext().setPrevious(null);	
+				head = node.getNext();
+			}
+		}
+		else if(tail == node){		
+			node.getPrevious().setNext(null);	
+			tail = node.getPrevious();	
+		}
+		else{	
+			node.getPrevious().setNext(node.getNext());	
+			node.getNext().setPrevious(node.getPrevious());	
+		}	
+		node.delete();	
+		size--;
+	}
 
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class Vertex<E,T> {
+public class Vertex<E,T> implements Comparable<Vertex<E,T>> {
 
 	private E data;
 	private int status;
@@ -16,6 +16,11 @@ public class Vertex<E,T> {
 	
 	
 	protected static final int UNCOLORED = 0;
+	
+	private Vertex<E,T> dijkstra_parent;
+	private double dijkstra_value;
+	private Edge<E,T> dijkstra_edge;
+	
 	
 	public Vertex(E data, int id){
 		this.data=data;
@@ -93,8 +98,50 @@ public class Vertex<E,T> {
 		return id;
 	}
 	
+	protected void removeInEdge(Domicilie <Edge<E,T>> node){
+		inEdges.remove(node);
+	}
+	
+	protected void removeOutEdge(Domicilie <Edge<E,T>> node){
+		outEdges.remove(node);
+	}
+	
+	public Vertex<E,T> getDijkstra_parent() {
+		return dijkstra_parent;
+	}
+	
+	public void setDijkstra_parent(Vertex<E,T> dijkstra_parent) {
+		this.dijkstra_parent = dijkstra_parent;
+	}
+	
+	public double getDijkstra_value() {
+		return dijkstra_value;
+	}
+	
+	public void setDijkstra_value(double dijkstra_value) {
+		this.dijkstra_value = dijkstra_value;
+	}
+	
+	public Edge<E,T> getDijkstra_edge() {
+		return dijkstra_edge;
+	}
+	
+	public void setDijkstra_edge(Edge<E,T> dijkstra_edge) {
+		this.dijkstra_edge = dijkstra_edge;
+	}
+	
 	public String toString(){
 		return String.format("<%s>", data.toString());
+	}
+
+	@Override
+	public int compareTo(Vertex<E, T> v) {
+		if(v.getDijkstra_value() == getDijkstra_value())
+			return 0;
+		else if(v.getDijkstra_value() < getDijkstra_value())
+			return 1;
+		else
+			return -1;
 	}
 	
 }
