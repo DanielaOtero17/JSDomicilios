@@ -1,21 +1,22 @@
 package Hilos;
 
+import model.Deliver;
 import model.Graph;
 import interfaz.MainInterfaz;
 
 public class ThreadMove implements Runnable{
 	
 	private MainInterfaz p;
-	private Graph g;
+	private Deliver d;
 	
-	public ThreadMove(MainInterfaz principal, Graph grafo) {
+	public ThreadMove(MainInterfaz principal, Deliver deliver) {
 		p=principal;
-		g=grafo;
+		d=deliver;
 	}
 
 	@Override
 	public void run() {
-		while(true){
+		while(!d.isEntregado()){
 			try{
 				
 			}

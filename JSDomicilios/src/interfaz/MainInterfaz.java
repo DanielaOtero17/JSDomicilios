@@ -1,11 +1,15 @@
 package interfaz;
 
+import model.Deliver;
 import model.Edge;
+import model.Product;
 import model.Vertex;
 import model.Graph;
 
 import java.io.*;
+
 import javax.swing.*;
+
 import java.awt.*;
 
 public class MainInterfaz extends JFrame{
@@ -46,34 +50,36 @@ public class MainInterfaz extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		
-		Graph<String,String> graph = new Graph<String,String>(false);
-		
-		Vertex<String,String> v1 = graph.addVertex("Domic-1");	
-		Vertex<String,String> v2 = graph.addVertex("Domic-2");
-		Vertex<String,String> v3 = graph.addVertex("Domic-3");
-		Vertex<String,String> v4 = graph.addVertex("Domic-4");
-		Vertex<String,String> v5 = graph.addVertex("Domic-5");
-		Vertex<String,String> v6 = graph.addVertex("Domic-6");
-		
-		graph.addEdge(v1, v4);
-		graph.addEdge(v4, v6);
-		graph.addEdge(v2,v5);
-		graph.addEdge(v5, v4);
-		graph.addEdge(v1, v3);
-		
-		System.out.println("Graph print: \n");
-		System.out.println(graph);
-		
-		System.out.println("Tours in the graph \n");
-		
-		System.out.println("BFS:");
-		for(Vertex<String,String> v : graph.BFS())
-			System.out.print(v + " ");
-		
-		System.out.println("\n\nDFS");
-		for(Vertex<String,String> v : graph.DFS())
-			System.out.print(v + " ");
+//		
+//		Graph<Deliver,String> graph = new Graph<Deliver,String>(false);
+//		
+//		Product[] a1= new Product[]{}; 
+//		
+//		Vertex<Deliver,String> v1 = graph.addVertex(null);	
+//		Vertex<Deliver,String> v2 = graph.addVertex(null);
+//		Vertex<Deliver,String> v3 = graph.addVertex(null);
+//		Vertex<Deliver,String> v4 = graph.addVertex(null);
+//		Vertex<Deliver,String> v5 = graph.addVertex(null);
+//		Vertex<Deliver,String> v6 = graph.addVertex(null);
+//		
+//		graph.addEdge(v1, v4);
+//		graph.addEdge(v4, v6);
+//		graph.addEdge(v2,v5);
+//		graph.addEdge(v5, v4);
+//		graph.addEdge(v1, v3);
+//		
+//		System.out.println("Graph print: \n");
+//		System.out.println(graph);
+//		
+//		System.out.println("Tours in the graph \n");
+//		
+//		System.out.println("BFS:");
+//		for(Vertex<Deliver,String> v : graph.BFS())
+//			System.out.print(v + " ");
+//		
+//		System.out.println("\n\nDFS");
+//		for(Vertex<Deliver,String> v : graph.DFS())
+//			System.out.print(v + " ");
 
 		MainInterfaz main = new MainInterfaz();
 		main.setVisible(true);

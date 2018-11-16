@@ -3,11 +3,33 @@ package model;
 public class Deliver {
 	
 	private String client;
-	private int[] address;
+	private int posX;
+	private int posY;
+	private Product[] products;
 	
-	public Deliver(String client, int[] address) {
+	private boolean entregado;
+	private int direccion;
+	
+	public static final int IZQ =0;
+	public static final int DER =1;
+	public static final int ABAJO =2;
+	public static final int ARRIBA =3;
+
+	public Deliver(String client,int posX, int posY, Product[] products) {
 		this.client = client;
-		this.address = address;
+		this.posX=posX;
+		this.posY=posY;
+		this.products = products;
+		entregado =false;
+		direccion =0;
+	}
+
+	public Product[] getProducts() {
+		return products;
+	}
+
+	public void setProducts(Product[] products) {
+		this.products = products;
 	}
 
 	public String getClient() {
@@ -18,17 +40,37 @@ public class Deliver {
 		this.client = client;
 	}
 
-	public int[] getAddress() {
-		return address;
+	public int getPosX() {
+		return posX;
 	}
 
-	public void setAddress(int[] address) {
-		this.address = address;
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public boolean isEntregado() {
+		return entregado;
+	}
+
+	public void setEntregado(boolean entregado) {
+		this.entregado = entregado;
 	}
 
 	@Override
 	public String toString() {
 		return  client;
+	}
+	
+	public void mover(){
+		
 	}
 	
 	
