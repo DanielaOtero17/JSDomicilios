@@ -12,14 +12,17 @@ public class Products_Panel extends JFrame implements ActionListener {
 	public final static String BUY="buy";
 	public final static String ACCEPT="accept";
 	private JButton[][]  butsAdd;
-	public JButton butAccept;
+	private JButton butAccept;
 	private JLabel[][] labImages;
 	//private JTextField[][] txtQuantity;
 	private MainInterfaz interfaz;
 	private JPanel aux;
 	private JPanel[][] matPanel;
+	private ImageIcon icono;
 	
 	public Products_Panel(MainInterfaz m){
+		icono = new ImageIcon("Imagenes/iconoWakanda.jpg");
+		this.setIconImage(icono.getImage());
 		setBackground(Color.WHITE);
 		setVisible(false);
 		setResizable(false);
