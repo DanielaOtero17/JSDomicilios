@@ -12,7 +12,10 @@ public class MainInterfaz extends JFrame{
 	
 	private ImageIcon icono;
 	private PanelGrafico imagenFondo;
+	private Options_Panel optionsPanel;
+	private Products_Panel productsPanel;
 	public MainInterfaz(){
+	
 		
 		setSize(1000,700);
 		setResizable(false);
@@ -28,8 +31,15 @@ public class MainInterfaz extends JFrame{
 		
 		add(imagenFondo,BorderLayout.CENTER);
 		
+		optionsPanel=new Options_Panel(this);
+		add(optionsPanel, BorderLayout.SOUTH);
 		
 		
+		productsPanel=new Products_Panel(this);
+	}
+	
+	public void showFrame(){
+		productsPanel.setVisible(true);
 	}
 
 	public static void main(String[] args) {
