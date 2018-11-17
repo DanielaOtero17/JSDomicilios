@@ -1,15 +1,9 @@
 package interfaz;
 
-import model.Deliver;
-import model.Edge;
-import model.Product;
-import model.Vertex;
-import model.Graph;
-
+import model.*;
+import Hilos.*;
 import java.io.*;
-
 import javax.swing.*;
-
 import java.awt.*;
 
 public class MainInterfaz extends JFrame{
@@ -18,7 +12,11 @@ public class MainInterfaz extends JFrame{
 	private PanelGrafico imagenFondo;
 	private Options_Panel optionsPanel;
 	private Products_Panel productsPanel;
-	public MainInterfaz(){
+	private worker thanos;
+	private Deliver deliver;
+	
+	
+	public MainInterfaz() throws ClassNotFoundException, IOException{
 		getContentPane().setBackground(Color.WHITE);
 	
 		
@@ -28,7 +26,7 @@ public class MainInterfaz extends JFrame{
 		
 		icono = new ImageIcon("Imagenes/iconoWakanda.jpg");
 		
-		imagenFondo = new PanelGrafico();		
+		imagenFondo = new PanelGrafico(this);		
 		imagenFondo.setBackground(Color.WHITE);
 		
 		this.setIconImage(icono.getImage());
@@ -43,13 +41,43 @@ public class MainInterfaz extends JFrame{
 		
 		
 		productsPanel=new Products_Panel(this);
+		
+		thanos = new worker(352,200);
+		
+		Product producto1 = new Product("Pizza",1800);
+		Product producto2 = new Product("Gaseosa",500);
+		Product[] productos = new Product[2];
+		productos[0] = producto1;
+		productos[1] = producto2;
+		deliver = new Deliver("Casita", 48,200,productos);
 	}
 	
 	public void showFrame(){
 		productsPanel.setVisible(true);
 	}
+	
+	public void moveWorker(){
+		
+			ThreadMove hilo = new ThreadMove(this, deliver);
+			hilo.start();
+	}
 
-	public static void main(String[] args) {
+	public worker getThanos(){
+		
+		return thanos;
+	}
+	
+	public void refrescar()
+
+	{
+		imagenFondo.refresh();
+	}
+	
+	public PanelGrafico getPanelGrafico(){
+		
+		return imagenFondo;
+	}
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 //		
 //		Graph<Deliver,String> graph = new Graph<Deliver,String>(false);
 //		
@@ -83,6 +111,7 @@ public class MainInterfaz extends JFrame{
 
 		MainInterfaz main = new MainInterfaz();
 		main.setVisible(true);
+		main.moveWorker();
 	}
 
 }

@@ -6,7 +6,6 @@ public class Deliver {
 	private int posX;
 	private int posY;
 	private Product[] products;
-	
 	private boolean entregado;
 	private int direccion;
 	
