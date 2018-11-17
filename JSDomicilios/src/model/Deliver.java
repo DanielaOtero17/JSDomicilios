@@ -1,58 +1,49 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Deliver {
 	
-	private String client;
-	private int posX;
-	private int posY;
-	private Product[] products;
+	private int client;
+	private String name;
+	private ArrayList<Product> products;
 	private boolean entregado;
-	private int direccion;
-	
-	public static final int IZQ =0;
-	public static final int DER =1;
-	public static final int ABAJO =2;
-	public static final int ARRIBA =3;
+	private int acumulado;
+	private Deliver Predecesor;
+	private boolean etiqueta;
 
-	public Deliver(String client,int posX, int posY, Product[] products) {
-		this.client = client;
-		this.posX=posX;
-		this.posY=posY;
-		this.products = products;
+	public Deliver() {
+		this.client = -1;
 		entregado =false;
-		direccion =0;
+		this.etiqueta = false;
+	    this.Predecesor  = null;
+	    this.acumulado =0; 
+	    this.products=null;
+	    this.name="Avergers";
 	}
 
-	public Product[] getProducts() {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public ArrayList<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Product[] products) {
+	public void setProducts(ArrayList<Product> products) {
 		this.products = products;
 	}
 
-	public String getClient() {
+	public int  getClient() {
 		return client;
 	}
 
-	public void setClient(String client) {
+	public void setClient(int client) {
 		this.client = client;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
 	}
 
 	public boolean isEntregado() {
@@ -62,16 +53,33 @@ public class Deliver {
 	public void setEntregado(boolean entregado) {
 		this.entregado = entregado;
 	}
+	
+	public boolean isEtiqueta() {
+        return etiqueta;
+    }
+
+    public int getAcumulado() {
+        return acumulado;
+    }
+
+    public Deliver getPredecesor() {
+        return Predecesor;
+    }
 
 	@Override
 	public String toString() {
-		return  client;
+		return  "ID: "+ client  + "   Name: " + name + "\n" ;
 	}
 	
-	public void mover(){
-		
-	}
-	
-	
+	public void setEtiqueta(boolean etiqueta) {
+        this.etiqueta = etiqueta;
+    }
 
+    public void setAcumulado(int acomulado) {
+        this.acumulado = acomulado;
+    }
+
+    public void setPredecesor(Deliver Predecesor) {
+        this.Predecesor = Predecesor;
+    }
 }

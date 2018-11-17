@@ -4,7 +4,6 @@ public class Domicilie<E> {
 
 	private Domicilie<E> next, previous;
 	private E data;
-	private Product[] products;
 	
 	
 	public Domicilie(E data, Domicilie<E> previous,Domicilie<E> next ){

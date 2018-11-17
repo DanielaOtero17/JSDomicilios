@@ -2,27 +2,34 @@ package interfaz;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class Products_Panel extends JFrame implements ActionListener {
+import model.Deliver;
+import model.Product;
 
+public class Products_Panel extends JFrame implements ActionListener {
+/**
+ * 
+ */
+	private static final long serialVersionUID = 1L;
+	
 	public final static int HIGH=2;
 	public final static int WIDTH=3;
-	public final static String BUY="buy";
+	
 	public final static String ACCEPT="accept";
 	private JButton[][]  butsAdd;
 	private JButton butAccept;
 	private JLabel[][] labImages;
-	//private JTextField[][] txtQuantity;
-	private MainInterfaz interfaz;
+	private Main p;
 	private JPanel aux;
 	private JPanel[][] matPanel;
-	private ImageIcon icono;
 	
-	public Products_Panel(MainInterfaz m){
-		icono = new ImageIcon("Imagenes/iconoWakanda.jpg");
-		this.setIconImage(icono.getImage());
+	private ArrayList<Product> product;
+	private String cliente;
+	
+	public Products_Panel(Main m){
 		setBackground(Color.WHITE);
 		setVisible(false);
 		setResizable(false);
@@ -33,12 +40,15 @@ public class Products_Panel extends JFrame implements ActionListener {
 		data[3]="Gaseosa";
 		data[4]="Arroz Chino";
 		data[5]="Papitas";
+		cliente="Avergers";
+		product = new ArrayList<Product>();
+		
 		matPanel=new JPanel[HIGH][WIDTH];
-		getContentPane().setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 		butAccept=new JButton("Accept");
 		butAccept.addActionListener(this);
 		butAccept.setActionCommand(ACCEPT);
-		interfaz=m;
+		p=m;
 		aux=new JPanel();
 		aux.setBackground(Color.WHITE);
 		aux.setLayout(new GridLayout(HIGH, WIDTH));
@@ -49,12 +59,13 @@ public class Products_Panel extends JFrame implements ActionListener {
 			for(int j=0; j<WIDTH; j++){
 				butsAdd[i][j]=new JButton(data[contador]);
 				butsAdd[i][j].addActionListener(this);
-				butsAdd[i][j].setActionCommand(BUY);
+				butsAdd[i][j].setActionCommand("buy" + contador);
 				
 				labImages[i][j]=new JLabel();
-				ImageIcon icono=new ImageIcon("Imagenes/images/image"+contador+".png");
+				ImageIcon icono=new ImageIcon("data/images/image"+contador+".png");
 				labImages[i][j].setIcon(icono);
 				matPanel[i][j]=new JPanel();
+				matPanel[i][j].setBackground(Color.WHITE);
 				matPanel[i][j].setLayout(new BorderLayout());
 				matPanel[i][j].add(labImages[i][j], BorderLayout.CENTER);
 				matPanel[i][j].add(butsAdd[i][j], BorderLayout.SOUTH);
@@ -65,15 +76,69 @@ public class Products_Panel extends JFrame implements ActionListener {
 			}
 		}
 
-		add(aux, BorderLayout.CENTER);
-		add(butAccept, BorderLayout.SOUTH);
+		getContentPane().add(aux, BorderLayout.CENTER);
+		getContentPane().add(butAccept, BorderLayout.SOUTH);
 	pack();	
 	}
 	
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) {
+		 String command = e.getActionCommand();
+		 if(command.equals("buy0")){
+			 product.add(new Product("Italiana",30000));
+			 JOptionPane.showMessageDialog(this, "Añadido");
+		 }
+		 if(command.equals("buy1")){
+			 product.add(new Product("Napolitana",35000));
+			 JOptionPane.showMessageDialog(this, "Añadido");
+		 }
+		 if(command.equals("buy2")){
+			 product.add(new Product("Especial",40000));
+			 JOptionPane.showMessageDialog(this, "Añadido");
+		 }
+		 if(command.equals("buy3")){
+			 product.add(new Product("Refresco",6500));
+			 JOptionPane.showMessageDialog(this, "Añadido");
+		 }
+		 if(command.equals("buy4")){
+			 product.add(new Product("Arroz chino",50000));
+			 JOptionPane.showMessageDialog(this, "Añadido");
+		 }
+		 if(command.equals("buy5")){
+			 product.add(new Product("Papas Fritas",5000));
+			 JOptionPane.showMessageDialog(this, "Añadido");
+		 }
+		 
+		if(command.equals(ACCEPT)){
+			try{
+				String Cliente = JOptionPane.showInputDialog(this, "Cliente: ");
+				if(!(cliente.isEmpty())){
+					cliente =Cliente;
+					p.salir();
+				}
+				else{
+					JOptionPane.showMessageDialog(this, "Escriba un nombre");
+				}
+				}
+				catch(Exception ex){
+					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
+				}
+		 }
+	}
+
+
+	public String getCliente() {
+		return cliente;
+	}
+
+
+	public ArrayList<Product> getProduct() {
+		return product;
+	}
+
+
+	public void setProduct(ArrayList<Product> product) {
+		this.product = product;
 	}
 }
