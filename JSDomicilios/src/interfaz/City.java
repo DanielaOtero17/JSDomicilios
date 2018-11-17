@@ -44,6 +44,10 @@ public class City extends JPanel implements MouseListener{
 		graph = new Graph<Deliver,String>(false);
 	}
 	
+	public City(){
+		
+	}
+	
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
@@ -87,7 +91,7 @@ public class City extends JPanel implements MouseListener{
 			clicIzqSobreNodo(xxx, yyy );            	          
 			if(nn==2){	              
 				nn=0;	               
-				Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente, nodoFin,main);	              
+				Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente, nodoFin,this);	              
 				Dijkstra.dijkstra();	              
 				main.acumulado(""+Dijkstra.getAcumulado());	               	           
 			}	       
@@ -221,7 +225,7 @@ public class City extends JPanel implements MouseListener{
 		if(tope>=2){	         
 			permanente = ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);// hacemos el llamano de la funcion         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese Nodo Fin..","nodo fin No existe",tope);	           
-			Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente,nodoFin,main);	            
+			Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente,nodoFin,this);	            
 			Dijkstra.dijkstra();	           
 			main.acumulado(""+Dijkstra.getAcumulado());
 		}

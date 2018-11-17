@@ -84,5 +84,9 @@ public class Main extends JFrame{
 	 public void mostrarDatos(){
 		datos.setDatos(city.getArboles().toString());
 	 }
+
+	public City getCity() {
+		return city;
+	}
 	
 }

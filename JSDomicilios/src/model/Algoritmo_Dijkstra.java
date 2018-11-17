@@ -1,6 +1,7 @@
 package model;
 
 
+import interfaz.City;
 import interfaz.Main;
 
 import java.awt.Color;
@@ -24,16 +25,15 @@ public class Algoritmo_Dijkstra {
    private int permanente;     
    private int nodoFin; 
    
-   public Main p;
+   public City p;
    
-   
-    public Algoritmo_Dijkstra (Arboles arboles, int tope,int permanente, int nodoFin, Main pr){
+    public Algoritmo_Dijkstra (Arboles arboles, int tope,int permanente, int nodoFin, City pr ){
         this.arboles = arboles;        
         this.tope = tope;
         this.nodo= new Deliver[tope]; 
         this.permanente = permanente;
         this.nodoFin = nodoFin;
-        p=pr;
+        p = pr;
         
     }
 
