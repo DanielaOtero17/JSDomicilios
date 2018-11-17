@@ -8,6 +8,8 @@ import java.util.Stack;
 
 public class Graph<E,T>{
 	
+	public final static int SIZE=10;	
+			
 	private Auxiliar<Vertex<E,T>> vertexList;
 	private Auxiliar<Edge<E,T>> edgeList;
 	
@@ -382,6 +384,24 @@ public class Graph<E,T>{
 			output += String.format("%s\n", e.toString());
 		}
 		return output;
+	}
+	
+	public int[][] warshall(int[][] dist, int tam ) {
+		int[][] routes= new int[SIZE][SIZE];
+		for(int i=0; i<tam; i++) {
+			for(int j=0; j<tam; j++) {
+				for(int k=0; k<tam; k++) {
+					if(dist[j][i]*dist[i][k]!=0 && j!=k) {
+						if(dist[j][i]+dist[i][k]<dist[j][k] || dist[j][k]==0) {
+							dist[j][k]=dist[j][i]+dist[i][k];
+							routes[j][k]=k;
+						}
+					}
+				}
+			}
+			
+		}
+		return routes;
 	}
 	
 }
