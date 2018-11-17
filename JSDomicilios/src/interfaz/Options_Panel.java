@@ -47,6 +47,8 @@ public class Options_Panel extends JPanel implements ActionListener{
 		String comando=a.getActionCommand();
 		if(comando.equals(START)){
 			
+			interfaz.moveWorker();
+			
 		}else if(comando.equals(TRAFFIC)){
 			
 		}else if(comando.equals(DISTANCE)){

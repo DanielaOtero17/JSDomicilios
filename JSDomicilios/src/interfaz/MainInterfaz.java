@@ -14,7 +14,7 @@ public class MainInterfaz extends JFrame{
 	private Products_Panel productsPanel;
 	private worker thanos;
 	private Deliver deliver;
-	
+	private JFrame aux;
 	
 	public MainInterfaz() throws ClassNotFoundException, IOException{
 		getContentPane().setBackground(Color.WHITE);
@@ -23,6 +23,7 @@ public class MainInterfaz extends JFrame{
 		setSize(1000,700);
 		setResizable(false);
 		setTitle("B I E N V I E N V E N I D O ~ J S  D O M I C I L I O S ~ B I E N V E N I D O");
+		
 		
 		icono = new ImageIcon("Imagenes/iconoWakanda.jpg");
 		
@@ -49,11 +50,24 @@ public class MainInterfaz extends JFrame{
 		Product[] productos = new Product[2];
 		productos[0] = producto1;
 		productos[1] = producto2;
-		deliver = new Deliver("Casita", 48,200,productos);
+		deliver = new Deliver("Casita", 760,126,productos);
 	}
 	
 	public void showFrame(){
 		productsPanel.setVisible(true);
+	}
+	
+	public void openApp() throws ClassNotFoundException, IOException{
+		
+		aux = new JFrame();
+		PaneInicio panel = new PaneInicio(this);
+		
+		aux.setSize(1000,560);
+		aux.add(panel,BorderLayout.CENTER);
+		
+		this.setVisible(false);
+		aux.setVisible(true);
+		
 	}
 	
 	public void moveWorker(){
@@ -110,8 +124,8 @@ public class MainInterfaz extends JFrame{
 //			System.out.print(v + " ");
 
 		MainInterfaz main = new MainInterfaz();
-		main.setVisible(true);
-		main.moveWorker();
+		
+		main.openApp();
 	}
 
 }
