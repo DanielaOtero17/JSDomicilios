@@ -82,7 +82,7 @@ public class Main extends JFrame{
 	 }
 	 
 	 public void mostrarDatos(){
-		datos.setDatos(iniciarPedido().toString());
+		datos.setDatos(city.getArboles().toString());
 	 }
 	
 }

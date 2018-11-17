@@ -84,7 +84,13 @@ public class Arboles {
 
 	@Override
 	public String toString() {
-		return nombre +  ", ";
+		int contador =0;
+		String m =" ";
+		while(nombre[contador]!=null){
+			m += nombre[contador] + "\n" ;
+			contador++;
+		}
+		return m;
 	}  
     
 }
