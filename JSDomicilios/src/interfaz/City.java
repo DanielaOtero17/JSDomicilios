@@ -43,10 +43,7 @@ public class City extends JPanel implements MouseListener{
 		
 		graph = new Graph<Deliver,String>(false);
 	}
-	
-	public City(){
-		
-	}
+
 	
 	@Override
 	public void paint(Graphics g){

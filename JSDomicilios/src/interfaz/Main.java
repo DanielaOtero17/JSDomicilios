@@ -77,7 +77,7 @@ public class Main extends JFrame{
 		 optionsPanel.setAcumulado(text);
 	 }
 	 
-	 public void recorrer(){
+	 public void recorrerD(){
 		 city.pintarDijkstra();
 	 }
 	 
@@ -87,6 +87,10 @@ public class Main extends JFrame{
 
 	public City getCity() {
 		return city;
+	}
+	
+	public void recorrer(){
+		
 	}
 	
 }

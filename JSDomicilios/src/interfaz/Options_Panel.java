@@ -115,7 +115,18 @@ public class Options_Panel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent a) {
 		String comando=a.getActionCommand();
 		if(comando.equals(START)){
-			interfaz.recorrer();
+			try{
+				String cliente = JOptionPane.showInputDialog(this, "Cliente: ");
+				if(!(cliente.isEmpty())){
+					
+				}
+				else{
+					JOptionPane.showMessageDialog(this, "Escriba un nombre");
+				}
+				}
+				catch(Exception ex){
+					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
+				}
 		}else if(comando.equals(TRAFFIC)){
 			interfaz.mostrarDatos();
 			
