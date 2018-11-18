@@ -15,6 +15,7 @@ import model.Matrices;
 import model.Deliver;
 import model.Graph;
 import model.Pintar;
+import javax.swing.border.LineBorder;
 
 public class City extends JPanel implements MouseListener{
 	
@@ -35,6 +36,8 @@ public class City extends JPanel implements MouseListener{
 	private Graph<Deliver, String> graph ;
 	
 	public City(Main m){
+		setBorder(new LineBorder(new Color(255, 0, 0), 2));
+		setBackground(Color.WHITE);
 		main =m;
 		arboles=new Matrices();
 		addMouseListener(this);
@@ -46,7 +49,7 @@ public class City extends JPanel implements MouseListener{
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
-		ImageIcon fondo = new ImageIcon("data/fondo.gif");
+		ImageIcon fondo = new ImageIcon("data/fondo4.png");
 		g.drawImage(fondo.getImage(), 0, 0, main.getWidth(), main.getHeight(), null);
 	}
 	 public void R_repaint(int tope, Matrices arboles){

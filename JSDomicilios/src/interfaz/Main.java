@@ -28,7 +28,8 @@ public class Main extends JFrame{
 		city = new City(this);		
 		setLayout(new BorderLayout());
 		setTitle("Wakanda");
-		setSize(575,499);
+		setSize(901,622);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
@@ -41,7 +42,7 @@ public class Main extends JFrame{
 		
 		add(optionsPanel,BorderLayout.WEST);
 		
-		add(datos,BorderLayout.EAST);
+		add(datos,BorderLayout.SOUTH);
 	}
 	
 	 public static void main(String[] args) {        

@@ -3,8 +3,11 @@ package interfaz;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
 import java.awt.Color;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
@@ -24,7 +27,12 @@ public class Panel_Datos extends JPanel{
 		datos = new JTextArea();
 		datos.setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
-		add(datos,BorderLayout.CENTER);
+        datos.setEditable( false );
+        JScrollPane scroll = new JScrollPane( datos );
+        scroll.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED );
+        scroll.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        add( scroll, BorderLayout.CENTER );
+        
 	}
 
 	public void setDatos(String datos) {
