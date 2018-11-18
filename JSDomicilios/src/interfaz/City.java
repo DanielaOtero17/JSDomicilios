@@ -221,8 +221,8 @@ public class City extends JPanel implements MouseListener{
 	
 	public void pintarDijkstra(){ 
 		if(tope>=2){	         
-			permanente = ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);         	         
-			nodoFin =  ingresarNodoOrigen("Ingrese Nodo Fin..","nodo fin No existe",tope);	           
+			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
+			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID fin No existe",tope);	           
 			Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente,nodoFin,this);	            
 			Dijkstra.dijkstra();	           
 			main.acumulado(""+Dijkstra.getAcumulado());
@@ -233,13 +233,13 @@ public class City extends JPanel implements MouseListener{
 	public void PintarFloyd(){
 			 
 		if(tope>2){
-			permanente = ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);         	         
-			nodoFin =  ingresarNodoOrigen("Ingrese Nodo Fin..","nodo fin No existe",tope);
+			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
+			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
 			FloydWarshall floyd = new FloydWarshall(arboles.getmAdyacencia(), tope, permanente, nodoFin, this);
 			floyd.executar();
 			main.acumulado(""+floyd.getAcumulado());
 		}
-		else JOptionPane.showMessageDialog(null,"Se deben de crear mas nodos ... ");
+		else JOptionPane.showMessageDialog(null,"No hay Domicilios ... ");
 	}
 	
 	public void R_paint(){
