@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import model.Deliver;
 import model.Product;
 
 public class Products_Panel extends JFrame implements ActionListener {
@@ -40,7 +39,7 @@ public class Products_Panel extends JFrame implements ActionListener {
 		data[3]="Gaseosa";
 		data[4]="Arroz Chino";
 		data[5]="Papitas";
-		cliente="Avergers";
+		cliente="Js_Domic";
 		product = new ArrayList<Product>();
 		
 		matPanel=new JPanel[HIGH][WIDTH];

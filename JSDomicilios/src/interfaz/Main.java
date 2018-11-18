@@ -12,6 +12,7 @@ import model.Matrices;
 import model.Deliver;
 import model.Graph;
 import model.Product;
+import model.Vertex;
 
 public class Main extends JFrame{
 	
@@ -27,7 +28,7 @@ public class Main extends JFrame{
 		
 		city = new City(this);		
 		setLayout(new BorderLayout());
-		setTitle("Wakanda");
+		setTitle("JS_Domicilie");
 		setSize(901,622);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -94,6 +95,13 @@ public class Main extends JFrame{
 	public City getCity() {
 		return city;
 	
+	}
+	
+	public Vertex<Deliver, String > inicial(){
+		Deliver d = new Deliver();
+		d.setName("JS_Domi");
+		Vertex<Deliver, String > v = new Vertex<Deliver, String >(d);
+		return v;
 	}
 	
 	public void release(){

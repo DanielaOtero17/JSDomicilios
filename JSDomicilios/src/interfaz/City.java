@@ -15,6 +15,8 @@ import model.Matrices;
 import model.Deliver;
 import model.Graph;
 import model.Pintar;
+import model.Vertex;
+
 import javax.swing.border.LineBorder;
 
 public class City extends JPanel implements MouseListener{
@@ -33,7 +35,7 @@ public class City extends JPanel implements MouseListener{
 	 
 	private int aristaMayor;
 	
-	private Graph<Deliver, String> graph ;
+	private Graph<Deliver,String> graph ;
 	
 	public City(Main m){
 		setBorder(new LineBorder(new Color(255, 0, 0), 2));
@@ -82,6 +84,8 @@ public class City extends JPanel implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent evt) {
+		Vertex<Deliver, String > v =null;
+		graph.addVertex(main.inicial().getData());
 		int xxx, yyy;   	       
 		xxx=evt.getX();	      
 		yyy=evt.getY();	      
@@ -101,6 +105,7 @@ public class City extends JPanel implements MouseListener{
 					arboles.setCordeY(tope,yyy);	              
 					arboles.setNombre(tope, main.iniciarPedido().getName());	            
 					Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(tope), arboles.getCordeY(tope),String.valueOf(arboles.getNombre(tope)));	          
+				    v = new Vertex<Deliver, String >(main.iniciarPedido());
 					tope++;          	          
 				} 	         
 				else JOptionPane.showMessageDialog(null,"Se ha llegado al Maximo de nodos..");	       
@@ -112,7 +117,10 @@ public class City extends JPanel implements MouseListener{
 				arboles.setmAdyacencia(id2, id, 1);	            
 				arboles.setmAdyacencia(id, id2, 1);	             
 				arboles.setmCoeficiente(id2, id,ta );	             
-				arboles.setmCoeficiente(id, id2, ta);	             
+				arboles.setmCoeficiente(id, id2, ta);
+				
+//				graph.addEdge(main.inicial(),v);
+				
 				Pintar.pintarLinea(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id), arboles.getCordeX(id2), arboles.getCordeY(id2), ta); 	             
 				Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id),String.valueOf(arboles.getNombre(id)));	             
 				Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id2), arboles.getCordeY(id2),String.valueOf(arboles.getNombre(id2)));	              
@@ -231,15 +239,23 @@ public class City extends JPanel implements MouseListener{
 	}
 	
 	public void PintarFloyd(){
-			 
-		if(tope>2){
+			
+		System.out.println(graph); 
+			
+		try{	
+			if(tope>2){
 			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
 			FloydWarshall floyd = new FloydWarshall(arboles.getmAdyacencia(), tope, permanente, nodoFin, this);
 			floyd.executar();
 			main.acumulado(""+floyd.getAcumulado());
+		
+			}
+			else JOptionPane.showMessageDialog(null,"No hay Domicilios ... ");
 		}
-		else JOptionPane.showMessageDialog(null,"No hay Domicilios ... ");
+		catch(Exception e){
+			JOptionPane.showMessageDialog(null,"algo esta mal");
+		}
 	}
 	
 	public void R_paint(){

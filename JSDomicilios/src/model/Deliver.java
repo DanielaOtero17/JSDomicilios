@@ -19,7 +19,7 @@ public class Deliver {
 	    this.Predecesor  = null;
 	    this.acumulado =0; 
 	    this.products=null;
-	    this.name="Avergers";
+	    this.name=null;
 	}
 
 	public String getName() {
@@ -68,7 +68,7 @@ public class Deliver {
 
 	@Override
 	public String toString() {
-		return  "ID: "+ client  + "   Name: " + name + "\n" ;
+		return  name ;
 	}
 	
 	public void setEtiqueta(boolean etiqueta) {

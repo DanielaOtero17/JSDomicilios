@@ -16,11 +16,6 @@ import java.awt.RenderingHints;
 
 import javax.swing.ImageIcon;
 
-/**
- * 
- * @author Jhusseth
- *
- */
 public class Pintar {   
     Color color;
      

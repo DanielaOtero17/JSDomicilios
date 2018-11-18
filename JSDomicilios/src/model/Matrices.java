@@ -6,12 +6,6 @@
 
 package model;
 
-import java.util.Arrays;
-
-/**
- *
- * @author fredy_000
- */
 public class Matrices {
    private int[][] mCoeficiente ;
    private int [][] mAdyacencia;
@@ -97,7 +91,7 @@ public class Matrices {
 		int contador =0;
 		String m ="";
 		while(nombre[contador]!=null){
-			m += "["+ "ID: " + contador + "    " + "Nombre: " + nombre[contador]+ "]" + "" ;
+			m += "["+ "ID: " + contador + "    " + "Nombre: " + nombre[contador]+ "]" + " -- " ;
 			contador++; 
 		}
 		return m;

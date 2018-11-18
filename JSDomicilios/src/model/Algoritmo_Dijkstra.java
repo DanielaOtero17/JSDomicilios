@@ -2,7 +2,6 @@ package model;
 
 
 import interfaz.City;
-import interfaz.Main;
 
 import java.awt.Color;
 

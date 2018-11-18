@@ -152,8 +152,8 @@ public class Options_Panel extends JPanel implements ActionListener{
 				catch(Exception ex){
 					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
 				}
-		}else if(comando.equals(TRAFFIC)){
-			interfaz.mostrarDatos();
+		}
+		else if(comando.equals(TRAFFIC)){
 			
 		}else if(comando.equals(DISTANCE)){
 			
