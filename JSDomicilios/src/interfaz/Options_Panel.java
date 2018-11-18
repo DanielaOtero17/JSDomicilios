@@ -116,12 +116,20 @@ public class Options_Panel extends JPanel implements ActionListener{
 		String comando=a.getActionCommand();
 		if(comando.equals(START)){
 			try{
-				String cliente = JOptionPane.showInputDialog(this, "Cliente: ");
-				if(!(cliente.isEmpty())){
-					
+				String cliente = JOptionPane.showInputDialog(this, " Inserte:  \n " + "1: Dijkstra      2 : FloydWarsshall");
+				if(cliente!=""){
+					if(cliente.equals("1")){
+						interfaz.recorrerDijkstra();
+					}
+					else if(cliente.equals("2")){
+						interfaz.recorrerFloyd();
+					}
+					else{
+						JOptionPane.showMessageDialog(this, "Solo se puede esccribir 1 ò 2");
+					}
 				}
 				else{
-					JOptionPane.showMessageDialog(this, "Escriba un nombre");
+					JOptionPane.showMessageDialog(this, "No puede haber campos vacios");
 				}
 				}
 				catch(Exception ex){

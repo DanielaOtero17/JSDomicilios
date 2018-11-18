@@ -77,8 +77,12 @@ public class Main extends JFrame{
 		 optionsPanel.setAcumulado(text);
 	 }
 	 
-	 public void recorrerD(){
+	 public void recorrerDijkstra(){
 		 city.pintarDijkstra();
+	 }
+	 
+	 public void recorrerFloyd(){
+		 JOptionPane.showMessageDialog(this, "proximamente");
 	 }
 	 
 	 public void mostrarDatos(){
@@ -87,10 +91,6 @@ public class Main extends JFrame{
 
 	public City getCity() {
 		return city;
-	}
-	
-	public void recorrer(){
-		
 	}
 	
 }

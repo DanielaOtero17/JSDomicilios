@@ -87,8 +87,8 @@ public class Arboles {
 		int contador =0;
 		String m ="";
 		while(nombre[contador]!=null){
-			m += nombre[contador] + "\n" ;
-			contador++;
+			m += "ID: " + contador + "    " + "Nombre: " + nombre[contador] + "\n" ;
+			contador++; 
 		}
 		return m;
 	}  
