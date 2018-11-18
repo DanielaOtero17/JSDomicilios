@@ -18,9 +18,6 @@ import model.Pintar;
 
 public class City extends JPanel implements MouseListener{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public Main main;
 	
