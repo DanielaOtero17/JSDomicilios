@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import model.Arboles;
+import model.FloydWarshall;
+import model.Matrices;
 import model.Deliver;
 import model.Graph;
 import model.Product;
@@ -55,7 +56,7 @@ public class Main extends JFrame{
 	 }
 	 
 	
-	 public void R_repaint(int tope, Arboles arboles){
+	 public void R_repaint(int tope, Matrices arboles){
 		 city.R_repaint(tope, arboles); 
 	 }
 	
@@ -82,7 +83,7 @@ public class Main extends JFrame{
 	 }
 	 
 	 public void recorrerFloyd(){
-		 JOptionPane.showMessageDialog(this, "proximamente");
+		 city.PintarFloyd();
 	 }
 	 
 	 public void mostrarDatos(){
@@ -91,6 +92,10 @@ public class Main extends JFrame{
 
 	public City getCity() {
 		return city;
+	
 	}
 	
+	public void release(){
+		city.R_paint();
+	}
 }

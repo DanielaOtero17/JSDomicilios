@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Algoritmo_Dijkstra;
-import model.Arboles;
+import model.FloydWarshall;
+import model.Matrices;
 import model.Deliver;
 import model.Graph;
 import model.Pintar;
@@ -23,7 +24,7 @@ public class City extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	public Main main;
 	
-	private Arboles arboles;
+	private Matrices arboles;
 	private int tope=0;  
 	 
 	private int nodoFin;   
@@ -38,7 +39,7 @@ public class City extends JPanel implements MouseListener{
 	
 	public City(Main m){
 		main =m;
-		arboles=new Arboles();
+		arboles=new Matrices();
 		addMouseListener(this);
 		
 		graph = new Graph<Deliver,String>(false);
@@ -51,7 +52,7 @@ public class City extends JPanel implements MouseListener{
 		ImageIcon fondo = new ImageIcon("data/fondo.gif");
 		g.drawImage(fondo.getImage(), 0, 0, main.getWidth(), main.getHeight(), null);
 	}
-	 public void R_repaint(int tope, Arboles arboles){
+	 public void R_repaint(int tope, Matrices arboles){
 		 for (int j = 0; j < tope; j++) {  
 			 for (int k = 0; k < tope; k++) {     
 				 if(arboles.getmAdyacencia(j, k) == 1)
@@ -122,11 +123,11 @@ public class City extends JPanel implements MouseListener{
 		main.mostrarDatos();
 	}
 
-	public Arboles getArboles() {
+	public Matrices getArboles() {
 		return arboles;
 	}
 
-	public void setArboles(Arboles arboles) {
+	public void setArboles(Matrices arboles) {
 		this.arboles = arboles;
 	}
 
@@ -140,7 +141,6 @@ public class City extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -221,12 +221,28 @@ public class City extends JPanel implements MouseListener{
 	
 	public void pintarDijkstra(){ 
 		if(tope>=2){	         
-			permanente = ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);// hacemos el llamano de la funcion         	         
+			permanente = ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese Nodo Fin..","nodo fin No existe",tope);	           
 			Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente,nodoFin,this);	            
 			Dijkstra.dijkstra();	           
 			main.acumulado(""+Dijkstra.getAcumulado());
 		}
 		else JOptionPane.showMessageDialog(null,"Se deben de crear mas nodos ... ");
+	}
+	
+	public void PintarFloyd(){
+			 
+		if(tope>2){
+			permanente = ingresarNodoOrigen("Ingrese Nodo Origen..","nodo Origen No existe",tope);         	         
+			nodoFin =  ingresarNodoOrigen("Ingrese Nodo Fin..","nodo fin No existe",tope);
+			FloydWarshall floyd = new FloydWarshall(arboles.getmAdyacencia(), tope, permanente, nodoFin, this);
+			floyd.executar();
+			main.acumulado(""+floyd.getAcumulado());
+		}
+		else JOptionPane.showMessageDialog(null,"Se deben de crear mas nodos ... ");
+	}
+	
+	public void R_paint(){
+		R_repaint(tope, arboles);
 	}
 }

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 
 public class Algoritmo_Dijkstra {
-   private  Arboles arboles;
+   private  Matrices arboles;
    private int subTope;
    private Deliver auxi=null;
    private int auxAumulado;
@@ -27,7 +27,7 @@ public class Algoritmo_Dijkstra {
    
    public City p;
    
-    public Algoritmo_Dijkstra (Arboles arboles, int tope,int permanente, int nodoFin, City pr ){
+    public Algoritmo_Dijkstra (Matrices arboles, int tope,int permanente, int nodoFin, City pr ){
         this.arboles = arboles;        
         this.tope = tope;
         this.nodo= new Deliver[tope]; 
@@ -48,7 +48,7 @@ public class Algoritmo_Dijkstra {
         if(permanente != nodoFin){
              p.paint(p.getGraphics());
              p.R_repaint(tope, arboles);   
-             Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(permanente), arboles.getCordeY(permanente), null,Color.GREEN); // pinta de color GREEN los nodos
+             Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(permanente), arboles.getCordeY(permanente), null,Color.GREEN);
             
         
             nodo[permanente].setEntregado(true);        
@@ -84,18 +84,19 @@ public class Algoritmo_Dijkstra {
                 }               
              }
             subTope++;                
-          }while(subTope<tope+1);          
-          auxi= nodo[nodoFin]; 
-           if(auxi.getPredecesor() == null )
-             JOptionPane.showMessageDialog(null,"No se Pudo LLegar Al Nodo "+nodoFin);          
-          while(auxi.getPredecesor() != null){           
-              Pintar.pintarCamino(p.getGraphics(), arboles.getCordeX(auxi.getClient()), arboles.getCordeY(auxi.getClient()), arboles.getCordeX(auxi.getPredecesor().getClient()), arboles.getCordeY(auxi.getPredecesor().getClient()),Color.GREEN);
-              Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(auxi.getClient()), arboles.getCordeY(auxi.getClient()), null,Color.GREEN);
-             auxi=auxi.getPredecesor();              
-          }  
-         Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(nodoFin), arboles.getCordeY(nodoFin), null,Color.GREEN);     
-       }
-       else Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(nodoFin), arboles.getCordeY(nodoFin), null,Color.GREEN);    
+          }
+          while(subTope<tope+1);                   
+            auxi= nodo[nodoFin];            
+            if(auxi.getPredecesor() == null )            
+            	JOptionPane.showMessageDialog(null,"No se Pudo LLegar Al Nodo "+nodoFin);                   
+            while(auxi.getPredecesor() != null){                        
+            	Pintar.pintarCamino(p.getGraphics(), arboles.getCordeX(auxi.getClient()), arboles.getCordeY(auxi.getClient()), arboles.getCordeX(auxi.getPredecesor().getClient()), arboles.getCordeY(auxi.getPredecesor().getClient()),Color.GREEN);             
+            	Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(auxi.getClient()), arboles.getCordeY(auxi.getClient()), null,Color.GREEN);             
+            	auxi=auxi.getPredecesor();                       
+            }          
+            Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(nodoFin), arboles.getCordeY(nodoFin), null,Color.GREEN);           
+        }     
+        else Pintar.clickSobreNodo(p.getGraphics(), arboles.getCordeX(nodoFin), arboles.getCordeY(nodoFin), null,Color.GREEN);    
     }
     
     

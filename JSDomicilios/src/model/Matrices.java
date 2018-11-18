@@ -12,7 +12,7 @@ import java.util.Arrays;
  *
  * @author fredy_000
  */
-public class Arboles {
+public class Matrices {
    private int[][] mCoeficiente ;
    private int [][] mAdyacencia;
    private int [] cordeX ;
@@ -22,7 +22,7 @@ public class Arboles {
    private String [] nombre;
    private int [] enArbol;
    
-   public Arboles(){
+   public Matrices(){
 	   mCoeficiente = new int [51][51];
 	   mAdyacencia  = new int [51][51];
 	   cordeX  = new int [51];
@@ -31,7 +31,9 @@ public class Arboles {
 	   enArbol  = null;
     }
 
-    public int getmCoeficiente(int i, int j ) {
+   
+
+	public int getmCoeficiente(int i, int j ) {
         return mCoeficiente[i][j];
     }
 
@@ -80,6 +82,14 @@ public class Arboles {
     }
     public void crearEnArbol(int i){
        enArbol = new int [i]; 
+    }
+    
+    public int[][] getmAdyacencia() {
+    	return mAdyacencia;
+    }
+
+    public void setmAdyacencia(int[][] mAdyacencia) {
+    	this.mAdyacencia = mAdyacencia;
     }
 
 	@Override
