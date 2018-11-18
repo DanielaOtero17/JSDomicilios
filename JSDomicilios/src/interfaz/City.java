@@ -118,7 +118,8 @@ public class City extends JPanel implements MouseListener{
 				id=-1;	              
 				id2=-1;
 			}	        
-		}	
+		}
+		main.mostrarDatos();
 	}
 
 	public Arboles getArboles() {
