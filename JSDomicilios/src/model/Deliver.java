@@ -12,14 +12,14 @@ public class Deliver {
 	private Deliver Predecesor;
 	private boolean etiqueta;
 
-	public Deliver() {
+	public Deliver(String name) {
 		this.client = -1;
 		entregado =false;
 		this.etiqueta = false;
 	    this.Predecesor  = null;
 	    this.acumulado =0; 
 	    this.products=null;
-	    this.name=null;
+	    this.name=name;
 	}
 
 	public String getName() {

@@ -42,7 +42,7 @@ public class Algoritmo_Dijkstra {
         
     public void dijkstra(){ 
          for (int i = 0; i < tope; i++)
-                    nodo[i]= new Deliver(); 
+                    nodo[i]= new Deliver("Js_Domic"); 
          
         if(permanente != nodoFin){
              p.paint(p.getGraphics());

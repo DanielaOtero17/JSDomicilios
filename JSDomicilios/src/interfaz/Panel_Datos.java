@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,23 +19,42 @@ public class Panel_Datos extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JTextArea datos;
+	private JTextArea datosM;
+	private JTextArea datosG;
 
 	public Panel_Datos(){
+		setLayout(new GridLayout(1,2));
+		
 		setBorder(new TitledBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "Deliver Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), "Datos Entrega", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setBackground(Color.WHITE);
-		datos = new JTextArea(2,20);
-		datos.setBackground(Color.WHITE);
-		setLayout(new BorderLayout());
-        datos.setEditable( false );
-        JScrollPane scroll = new JScrollPane( datos );
+		
+		datosM = new JTextArea(4,20);
+		datosM.setBackground(Color.WHITE);
+        datosM.setEditable( false );
+        
+        datosG= new JTextArea(4,20);
+		datosG.setBackground(Color.WHITE);
+        datosG.setEditable( false );
+        
+        
+        JScrollPane scroll = new JScrollPane( datosM );
         scroll.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED );
         scroll.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
-        add( scroll, BorderLayout.CENTER );
+        
+        JScrollPane scroll2 = new JScrollPane( datosG );
+        scroll2.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED );
+        scroll2.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        
+        add( scroll);
+        add( scroll2);
         
 	}
 
 	public void setDatos(String datos) {
-		this.datos.setText(datos);
+		this.datosM.setText(datos);
+	}
+	
+	public void setDatos2(String datos) {
+		this.datosG.setText(datos);
 	}
 }

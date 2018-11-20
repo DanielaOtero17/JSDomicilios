@@ -40,7 +40,7 @@ public class FloydWarshall {
 	public void executar() {
 		
 		for (int i = 0; i < tope; i++){
-            nodo[i]= new Deliver(); 
+            nodo[i]= new Deliver("Js_Domic"); 
 		}
 		
 		if(permanente != nodoFin){

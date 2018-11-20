@@ -91,7 +91,7 @@ public class Matrices {
 		int contador =0;
 		String m ="";
 		while(nombre[contador]!=null){
-			m += "["+ "ID: " + contador + "    " + "Nombre: " + nombre[contador]+ "]" + " -- " ;
+			m += "["+ "ID: " + contador + "    " + "Nombre: " + nombre[contador]+ "]" + "\n" ;
 			contador++; 
 		}
 		return m;
