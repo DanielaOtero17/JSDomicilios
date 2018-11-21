@@ -84,7 +84,14 @@ public class City extends JPanel implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent evt) {
 		
+		if(main.iniciarPedido().getName()!=null){
+//			if(main.iniciarPedido().getName().equals(main.nCliente())){
+//				JOptionPane.showMessageDialog(null,"Ordenes no pueden ser iguales");
+//			}
+//			else{
+		
 		Vertex<Domicilie<Deliver>,String> v = null;
+		Vertex<Domicilie<Deliver>,String> v2 = null;
 		
 		int xxx, yyy;   	       
 		xxx=evt.getX();	      
@@ -122,12 +129,17 @@ public class City extends JPanel implements MouseListener{
 				Pintar.pintarLinea(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id), arboles.getCordeX(id2), arboles.getCordeY(id2), ta); 	             
 				Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id),String.valueOf(arboles.getNombre(id)));	             
 				Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id2), arboles.getCordeY(id2),String.valueOf(arboles.getNombre(id2)));	
-				Edge<Domicilie<Deliver>,String> e1[] = main.getGraph().addEdge(main.inicial(), v);
+//				Edge<Domicilie<Deliver>,String> e1[] = main.getGraph().addEdge(v2, v);
 				id=-1;	              
 				id2=-1;
 			}	        
 		}
+		main.setCliente();
 		main.mostrarDatos();
+		}
+		else{
+			JOptionPane.showMessageDialog(null,"Debe inicarse una orden");	  
+		}
 	}
 
 	public Matrices getArboles() {

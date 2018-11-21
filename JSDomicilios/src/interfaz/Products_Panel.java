@@ -39,7 +39,7 @@ public class Products_Panel extends JFrame implements ActionListener {
 		data[3]="Gaseosa";
 		data[4]="Arroz Chino";
 		data[5]="Papitas";
-		cliente="Js_Domic";
+		cliente=null;
 		product = new ArrayList<Product>();
 		
 		matPanel=new JPanel[HIGH][WIDTH];
@@ -112,8 +112,8 @@ public class Products_Panel extends JFrame implements ActionListener {
 		if(command.equals(ACCEPT)){
 			try{
 				String Cliente = JOptionPane.showInputDialog(this, "Cliente: ");
-				if(!(cliente.isEmpty())){
-					cliente =Cliente;
+				if(!(Cliente.equals(" "))){
+					setCliente(Cliente);
 					p.salir();
 				}
 				else{
@@ -129,6 +129,10 @@ public class Products_Panel extends JFrame implements ActionListener {
 
 	public String getCliente() {
 		return cliente;
+	}
+	
+	public void setCliente(String product) {
+		this.cliente = product;
 	}
 
 

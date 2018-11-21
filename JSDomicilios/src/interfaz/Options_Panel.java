@@ -17,7 +17,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	public final static String START="start";
-	public final static String TRAFFIC="traffic";
+	public final static String TRAVEL="travel";
 	public final static String DISTANCE="distance";
 	public final static String ORDER="order";
 	private JButton butStart;
@@ -46,37 +46,38 @@ public class Options_Panel extends JPanel implements ActionListener{
 		panelBotones.setBackground(Color.WHITE);
 		add(panelBotones,BorderLayout.NORTH);
 		panelBotones.setLayout(new GridLayout(5, 1,0, 7));
-		butStart=new JButton("Start");
-		panelBotones.add(butStart);
-		butStart.setFont(new Font("Kalinga", Font.PLAIN, 11));
-		butStart.setBackground(Color.WHITE);
-		
-		repaint = new JButton("Refresh");
-		repaint.setFont(new Font("Kalinga", Font.PLAIN, 11));
-		repaint.setBackground(Color.WHITE);
-		repaint.addActionListener(this);
-		repaint.setActionCommand(REPAINT);
-		
-		butStart.addActionListener(this);
-		butStart.setActionCommand(START);
-		butTraffic=new JButton("Lower traffic");
-		panelBotones.add(butTraffic);
-		butTraffic.setFont(new Font("Kalinga", Font.PLAIN, 11));
-		butTraffic.setBackground(Color.WHITE);
-		butTraffic.addActionListener(this);
-		butTraffic.setActionCommand(TRAFFIC);
-		butDistance=new JButton("Lower distance");
-		panelBotones.add(butDistance);
-		butDistance.setFont(new Font("Kalinga", Font.PLAIN, 11));
-		butDistance.setBackground(Color.WHITE);
-		butDistance.addActionListener(this);
-		butDistance.setActionCommand(DISTANCE);
 		butOrder=new JButton("Order");
 		panelBotones.add(butOrder);
 		butOrder.setFont(new Font("Kalinga", Font.PLAIN, 11));
 		butOrder.setBackground(Color.WHITE);
 		butOrder.addActionListener(this);
 		butOrder.setActionCommand(ORDER);
+		butStart=new JButton("Start");
+		
+		butStart.setFont(new Font("Kalinga", Font.PLAIN, 11));
+		butStart.setBackground(Color.WHITE);
+		panelBotones.add(butStart);
+		
+		butStart.addActionListener(this);
+		butStart.setActionCommand(START);
+		
+		repaint = new JButton("Refresh");
+		repaint.setFont(new Font("Kalinga", Font.PLAIN, 11));
+		repaint.setBackground(Color.WHITE);
+		repaint.addActionListener(this);
+		repaint.setActionCommand(REPAINT);
+		butDistance=new JButton("Lower distance");
+		panelBotones.add(butDistance);
+		butDistance.setFont(new Font("Kalinga", Font.PLAIN, 11));
+		butDistance.setBackground(Color.WHITE);
+		butDistance.addActionListener(this);
+		butDistance.setActionCommand(DISTANCE);
+		butTraffic=new JButton("Lower traffic");
+		panelBotones.add(butTraffic);
+		butTraffic.setFont(new Font("Kalinga", Font.PLAIN, 11));
+		butTraffic.setBackground(Color.WHITE);
+		butTraffic.addActionListener(this);
+		butTraffic.setActionCommand(TRAVEL);
 		panelBotones.setBackground(Color.WHITE);
 		
 		panelBotones.add(new JLabel());
@@ -153,7 +154,8 @@ public class Options_Panel extends JPanel implements ActionListener{
 					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
 				}
 		}
-		else if(comando.equals(TRAFFIC)){
+		else if(comando.equals(TRAVEL)){
+			
 			
 		}else if(comando.equals(DISTANCE)){
 			

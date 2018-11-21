@@ -86,7 +86,6 @@ public class Main extends JFrame{
 		ArrayList<Product> product= productsPanel.getProduct();
 		deliver = new Deliver(productsPanel.getCliente());
 		deliver.setProducts(product);
-		deliver.setName(productsPanel.getCliente());
 		
 		return deliver;
 	}
@@ -121,10 +120,19 @@ public class Main extends JFrame{
 		Deliver d = new Deliver("Js_Domic");
 		Domicilie<Deliver> d1 = new Domicilie<Deliver>(d);
 		Vertex<Domicilie<Deliver>, String > v = new Vertex<Domicilie<Deliver>, String >(d1);
+		v = graph.addVertex(d1);
 		return v;
 	}
 	
 	public void release(){
 		city.R_paint();
+	}
+	
+	public String nCliente (){
+		return productsPanel.getCliente();
+	}
+	
+	public void setCliente (){
+		productsPanel.setCliente(null);
 	}
 }
