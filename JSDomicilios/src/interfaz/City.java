@@ -255,9 +255,9 @@ public class City extends JPanel implements MouseListener{
 			if(tope>2){
 			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
-			FloydWarshall floyd = new FloydWarshall(arboles.getmAdyacencia(), tope, permanente, nodoFin, this);
-			floyd.executar();
-			main.acumulado(""+floyd.getAcumulado());
+//			FloydWarshall floyd = new FloydWarshall();
+//			floyd.executar();
+//			main.acumulado(""+floyd.getAcumulado());
 		
 			}
 			else JOptionPane.showMessageDialog(null,"No hay Domicilios ... ");
