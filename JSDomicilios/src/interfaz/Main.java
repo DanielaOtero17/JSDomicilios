@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ import model.FloydWarshall;
 import model.Matrices;
 import model.Deliver;
 import model.Graph;
+import model.Pintar;
 import model.Product;
 import model.Vertex;
 
@@ -53,9 +55,9 @@ public class Main extends JFrame implements ActionListener{
 		
 		add(optionsPanel,BorderLayout.WEST);
 		
-		add(datos,BorderLayout.SOUTH);
+		add(datos,BorderLayout.EAST);
 		
-		graph = new Graph<Domicilie<Deliver>,String>(false);
+		graph = new Graph<Domicilie<Deliver>,String>(true);
 	}
 	
 	 public Graph<Domicilie<Deliver>, String> getGraph() {
@@ -66,7 +68,8 @@ public class Main extends JFrame implements ActionListener{
 		 
 		 aux.setSize(600,600);
 		 aux.setLayout(new BorderLayout());
-		 aux.add(imagenFondo,BorderLayout.CENTER);	
+		 aux.add(imagenFondo,BorderLayout.CENTER);
+		 aux.setLocationRelativeTo(null);
 		 
 		 this.setVisible(false);
 		 aux.setVisible(true);
@@ -76,7 +79,8 @@ public class Main extends JFrame implements ActionListener{
 		
 		 Main v = new Main();
 		 v.setVisible(true);
-		 v.showStarted();
+//		 v.showStarted();
+		 
 
 	 }
 	 
@@ -96,7 +100,9 @@ public class Main extends JFrame implements ActionListener{
 	
 	public Deliver iniciarPedido(){
 		Deliver deliver=null;
+		
 		ArrayList<Product> product= productsPanel.getProduct();
+		
 		deliver = new Deliver(productsPanel.getCliente());
 		deliver.setProducts(product);
 		
@@ -130,7 +136,7 @@ public class Main extends JFrame implements ActionListener{
 	}
 	
 	public Vertex<Domicilie<Deliver>, String > inicial(){
-		Deliver d = new Deliver("Js_Domic");
+		Deliver d = new Deliver("<< Js_Domic >>");
 		Domicilie<Deliver> d1 = new Domicilie<Deliver>(d);
 		Vertex<Domicilie<Deliver>, String > v = new Vertex<Domicilie<Deliver>, String >(d1);
 		v = graph.addVertex(d1);
@@ -145,13 +151,37 @@ public class Main extends JFrame implements ActionListener{
 		return productsPanel.getCliente();
 	}
 	
-	public void setCliente (){
-		productsPanel.setCliente(null);
+	public void setCliente (int tope){
+		productsPanel.setCliente("Entrega:" + tope);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
+	}
+	
+	public void añadirVertices(int tope){
 		
+		for (int j = 0; j <tope-1; j++){
+			Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(j)));
+			graph.addVertex(d);	
+		}
+	}
+	
+	public void añadirAristas(int id,int id2,int tope){	
+		Vertex<Domicilie<Deliver>,String> v = null;
+		Vertex<Domicilie<Deliver>,String> v2 = null;	
+		Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(id)));		
+		Domicilie<Deliver> d2 = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(id2)));	
+		v = graph.addVertex(d);	
+		v2 =graph.addVertex(d2);
+		for (int j = 0; j < tope; j++) { 		
+			for (int k = 0; k < tope; k++) {     				
+				if(city.getArboles().getmAdyacencia(j, k) == 1){							
+					Edge<Domicilie<Deliver>,String> e1[] = graph.addEdge(v, v2,null,city.getArboles().getmCoeficiente(j, k));							
+				}			
+		
+			}
+		}
 	}
 }

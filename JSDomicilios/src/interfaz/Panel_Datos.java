@@ -1,6 +1,5 @@
 package interfaz;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -23,16 +22,16 @@ public class Panel_Datos extends JPanel{
 	private JTextArea datosG;
 
 	public Panel_Datos(){
-		setLayout(new GridLayout(1,2));
+		setLayout(new GridLayout(2,1));
 		
 		setBorder(new TitledBorder(new TitledBorder(new LineBorder(new Color(192, 192, 192)), "Deliver Date", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)), "Datos Entrega", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setBackground(Color.WHITE);
 		
-		datosM = new JTextArea(4,20);
+		datosM = new JTextArea(3,10);
 		datosM.setBackground(Color.WHITE);
         datosM.setEditable( false );
         
-        datosG= new JTextArea(4,20);
+        datosG= new JTextArea(3,10);
 		datosG.setBackground(Color.WHITE);
         datosG.setEditable( false );
         

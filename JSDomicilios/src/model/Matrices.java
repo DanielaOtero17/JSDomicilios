@@ -23,9 +23,11 @@ public class Matrices {
 	   cordeY = new int [51];
 	   nombre = new String [51];
 	   enArbol  = null;
+	   
+	   setCordeX(0,309);	              					
+	   setCordeY(0,223);
+	   setNombre(0, "Js_Domic");
     }
-
-   
 
 	public int getmCoeficiente(int i, int j ) {
         return mCoeficiente[i][j];
@@ -89,9 +91,9 @@ public class Matrices {
 	@Override
 	public String toString() {
 		int contador =0;
-		String m ="";
+		String m ="ID " +"        " +  "Nombre " + "\n";
 		while(nombre[contador]!=null){
-			m += "["+ "ID: " + contador + "    " + "Nombre: " + nombre[contador]+ "]" + "\n" ;
+			m += contador + "    " + nombre[contador] + "\n";
 			contador++; 
 		}
 		return m;

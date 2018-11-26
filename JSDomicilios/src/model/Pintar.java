@@ -49,7 +49,7 @@ public class Pintar {
         if(y1>=y2)
             yAux=((y1-y2)/2)+y2;        
         
-        g.setColor(Color.CYAN);
+        g.setColor(Color.YELLOW);
         Font fuente=new Font("Monospaced",Font.BOLD, 15);
         g.setFont(fuente);
       ((Graphics2D)g).drawString(String.valueOf(tam), xAux, yAux);
