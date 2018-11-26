@@ -11,7 +11,7 @@ public class Auxiliar <E> {
 		tail =null;
 	}
 	
-	public Domicilie addDomicilie(E data){
+	public Domicilie<E> addDomicilie(E data){
 		Domicilie<E> node = new Domicilie<E>(data);
 		
 		if(size==0){
@@ -26,7 +26,7 @@ public class Auxiliar <E> {
 		return node;
 	}
 	
-	public Domicilie addFirst(E data){
+	public Domicilie<E>  addFirst(E data){
 		Domicilie<E> node = new Domicilie<E>(data);
 		
 		if(size > 0)

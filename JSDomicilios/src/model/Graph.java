@@ -202,7 +202,7 @@ public class Graph<E,T>{
 				
 				if(
 						(!directed && oppositeVertex.getStatus() == Vertex.VISITED) ||
-						(directed && oppositeVertex.getStatus() == Vertex.VISITING && v.getColor() == oppositeVertex.getColor()) // Third condition is for DiGraph (Check earlier this method...)
+						(directed && oppositeVertex.getStatus() == Vertex.VISITING && v.getColor() == oppositeVertex.getColor())
 				){
 					isCyclic = true;
 				}
@@ -329,8 +329,8 @@ public class Graph<E,T>{
 						oppositeVertex.setDijkstra_value(pathCost);
 						edge.setStatus(Edge.DISCOVERED);
 						oppositeVertex.setDijkstra_parent(polled);
-						oppositeVertex.getDijkstra_edge().setStatus(Edge.FORWARD); // Mark previous edge as FORWARD
-						oppositeVertex.setDijkstra_edge(edge); // Update edge that makes it shortest path
+						oppositeVertex.getDijkstra_edge().setStatus(Edge.FORWARD); 
+						oppositeVertex.setDijkstra_edge(edge);
 					}
 				}
 			}
