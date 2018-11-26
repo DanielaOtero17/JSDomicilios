@@ -7,7 +7,7 @@ public class Kruskal<E,T> extends ArbolRecubridorMinimo<E,T> {
 	
     @Override
     public Graph<E,T> obtenerARM(Graph<E,T> G) throws IllegalArgumentException {
-        if(!G.isConnected()) throw new IllegalArgumentException("Error al generar arbol recubridor mínimo: el grafo no es conexo.");
+        if(!G.isConnected()) throw new IllegalArgumentException("Error al generar arbol recubridor minimo: el grafo no es conexo.");
         
         int n = G.vertices_array().length;
 

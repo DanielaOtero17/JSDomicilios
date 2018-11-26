@@ -23,7 +23,7 @@ import model.Pintar;
 import model.Product;
 import model.Vertex;
 
-public class Main extends JFrame implements ActionListener{
+public class Main extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -32,8 +32,6 @@ public class Main extends JFrame implements ActionListener{
 	private Options_Panel optionsPanel;
 	private Panel_Datos datos;
 	private Graph<Domicilie<Deliver>,String> graph ;
-	private PanelFondo imagenFondo;
-	private JFrame aux;
 	private Info_Products info;
 	public Main(){
 		
@@ -49,11 +47,9 @@ public class Main extends JFrame implements ActionListener{
 		city = new City(this);		
 		productsPanel= new Products_Panel(this);
 		optionsPanel=new Options_Panel(this);
-		imagenFondo = new PanelFondo(this);
 		
 		datos = new Panel_Datos();
 		
-		aux = new JFrame();
 		
 		add(city,BorderLayout.CENTER);
 		add(optionsPanel,BorderLayout.WEST);
@@ -66,30 +62,13 @@ public class Main extends JFrame implements ActionListener{
 	 public Graph<Domicilie<Deliver>, String> getGraph() {
 		return graph;
 	}
-	 
-	 public void showStarted(){
-		 
-		 aux.setSize(600,600);
-		 aux.setLayout(new BorderLayout());
-		 aux.add(imagenFondo,BorderLayout.CENTER);
-		 aux.setLocationRelativeTo(null);
-		 
-		 this.setVisible(false);
-		 aux.setVisible(true);
-	 }
 
 	public static void main(String[] args) {
 		
 		 Main v = new Main();
 		 v.setVisible(true);
-//		 v.showStarted();
 		 
 
-	 }
-	 
-	 public JFrame getAux(){
-		 
-		 return aux;
 	 }
 	
 	 public void showFrame(){
@@ -170,11 +149,6 @@ public class Main extends JFrame implements ActionListener{
 	
 	public void setCliente (int tope){
 		productsPanel.setCliente("Entrega:" + tope);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 	}
 	
 	public void añadirVertices(int tope){
