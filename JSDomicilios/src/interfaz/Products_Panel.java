@@ -24,9 +24,9 @@ public class Products_Panel extends JFrame implements ActionListener {
 	private Main p;
 	private JPanel aux;
 	private JPanel[][] matPanel;
-	
 	private ArrayList<Product> product;
 	private String cliente;
+	private Product[] products;
 	
 	public Products_Panel(Main m){
 		setBackground(Color.WHITE);
@@ -81,6 +81,16 @@ public class Products_Panel extends JFrame implements ActionListener {
 		getContentPane().add(aux, BorderLayout.CENTER);
 		getContentPane().add(butAccept, BorderLayout.SOUTH);
 	pack();	
+	}
+	
+	public void setProducts(Product[] p){
+		
+		products = p;
+	}
+	
+	public Product[] getProducts(){
+		
+		return products;
 	}
 	
 

@@ -33,9 +33,10 @@ public class Main extends JFrame implements ActionListener{
 	private Graph<Domicilie<Deliver>,String> graph ;
 	private PanelFondo imagenFondo;
 	private JFrame aux;
+	private Info_Products info;
 	public Main(){
 		
-		city = new City(this);		
+		
 		setLayout(new BorderLayout());
 		setTitle("JS_Domicilie");
 		setSize(901,622);
@@ -43,9 +44,9 @@ public class Main extends JFrame implements ActionListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
-		add(city,BorderLayout.CENTER);
-		
-		productsPanel=new Products_Panel(this);
+		info = new Info_Products(this);
+		city = new City(this);		
+		productsPanel= new Products_Panel(this);
 		optionsPanel=new Options_Panel(this);
 		imagenFondo = new PanelFondo(this);
 		
@@ -53,6 +54,7 @@ public class Main extends JFrame implements ActionListener{
 		
 		aux = new JFrame();
 		
+		add(city,BorderLayout.CENTER);
 		add(optionsPanel,BorderLayout.WEST);
 		
 		add(datos,BorderLayout.EAST);
@@ -90,9 +92,19 @@ public class Main extends JFrame implements ActionListener{
 	 }
 	
 	 public void showFrame(){
-		 productsPanel.setVisible(true);
+		 info.setVisible(true);
 	 }
 	 
+	 public Products_Panel getProductsPanel(){
+		 
+		 return productsPanel;
+	 }
+	 
+	 public Product[] products(){
+		 
+		 Product[] products = productsPanel.getProducts();
+		 return products;
+	 }
 	
 	 public void R_repaint(int tope, Matrices arboles){
 		 city.R_repaint(tope, arboles); 
