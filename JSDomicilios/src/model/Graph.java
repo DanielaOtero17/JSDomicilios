@@ -202,7 +202,7 @@ public class Graph<E,T>{
 				
 				if(
 						(!directed && oppositeVertex.getStatus() == Vertex.VISITED) ||
-						(directed && oppositeVertex.getStatus() == Vertex.VISITING && v.getColor() == oppositeVertex.getColor()) // Third condition is for DiGraph (Check earlier this method...)
+						(directed && oppositeVertex.getStatus() == Vertex.VISITING && v.getColor() == oppositeVertex.getColor())
 				){
 					isCyclic = true;
 				}
@@ -280,23 +280,7 @@ public class Graph<E,T>{
 	public boolean isCyclic(){
 		DFS();
 		return isCyclic;
-	}
-	
-//	public boolean isConnected(){
-//		if(directed)
-//			BFS_DiGraph_helper();
-//		else
-//			DFS();
-//		return isConnected;
-//	}
-//	
-//	public int connectedComponents(){
-//		if(directed)
-//			BFS_DiGraph_helper();
-//		else
-//			DFS();
-//	}
-	
+	}	
 
 	public void dijkstra(Vertex<E,T> v){
 		
@@ -345,8 +329,8 @@ public class Graph<E,T>{
 						oppositeVertex.setDijkstra_value(pathCost);
 						edge.setStatus(Edge.DISCOVERED);
 						oppositeVertex.setDijkstra_parent(polled);
-						oppositeVertex.getDijkstra_edge().setStatus(Edge.FORWARD); // Mark previous edge as FORWARD
-						oppositeVertex.setDijkstra_edge(edge); // Update edge that makes it shortest path
+						oppositeVertex.getDijkstra_edge().setStatus(Edge.FORWARD); 
+						oppositeVertex.setDijkstra_edge(edge);
 					}
 				}
 			}
@@ -360,8 +344,7 @@ public class Graph<E,T>{
 		
 		while(current.getDijkstra_edge() != null){
 			path.push(current.getDijkstra_edge());
-			current = current.getDijkstra_parent();
-		}
+			current = current.getDijkstra_parent();}
 		
 		Edge<E,T>[] edges = new Edge[path.size()];
 		int index =  0;
@@ -370,13 +353,33 @@ public class Graph<E,T>{
 		return edges;
 	}
 	
+	public boolean contain(Vertex<E,T> v){
+		Iterator<Vertex<E,T>> iter = vertices();
+		while(iter.hasNext()){
+			if(iter.next().getData()==v.getData()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isEmpty(){
+		Iterator<Vertex<E,T>> iter = vertices();
+		while(iter.hasNext()){
+			if(iter.next()!=null){
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	
 	public String toString(){
-//		String output = "Vertices:\n";
-//		for(Vertex<E,T> v : vertices_array())
-//			output += String.format("%s ", v.toString());
-		String output ="";
-		output += "Edges:\n";
+		String output = "Vertices:\n";
+		for(Vertex<E,T> v : vertices_array())
+			output += String.format("%s ", v.toString());
+		
+		output += "\nEdges:\n";
 		
 		for(Edge<E,T> e : edges_array()){
 			output += String.format("%s\n", e.toString());

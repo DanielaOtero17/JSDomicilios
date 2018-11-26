@@ -73,18 +73,11 @@ public class Main extends JFrame implements ActionListener{
 	 }
 
 	public static void main(String[] args) {
-		 
+		
 		 Main v = new Main();
 		 v.setVisible(true);
 		 v.showStarted();
-		 
-//		 Graph<Domicilie,String> graph = new Graph<Domicilie,String>(false);
-//		 
-//			Vertex<Domicilie,String> v1 = graph.addVertex(new Domicilie<String>("Js_Domic"));
-//			Vertex<Domicilie,String> v2 = graph.addVertex(new Domicilie<String>("Js_Domic"));
-//			
-//			Edge<Domicilie,String> e1[] = graph.addEdge(v1, v2);
-//			System.out.println(graph);
+
 	 }
 	 
 	 public JFrame getAux(){
