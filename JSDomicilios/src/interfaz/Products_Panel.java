@@ -2,6 +2,12 @@ package interfaz;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -74,7 +80,6 @@ public class Products_Panel extends JFrame implements ActionListener {
 				
 			}
 		}
-
 		getContentPane().add(aux, BorderLayout.CENTER);
 		getContentPane().add(butAccept, BorderLayout.SOUTH);
 	pack();	
@@ -83,47 +88,81 @@ public class Products_Panel extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 String command = e.getActionCommand();
-		 if(command.equals("buy0")){
-			 product.add(new Product("Italiana",30000));
-			 JOptionPane.showMessageDialog(this, "Añadido");
-		 }
-		 if(command.equals("buy1")){
-			 product.add(new Product("Napolitana",35000));
-			 JOptionPane.showMessageDialog(this, "Añadido");
-		 }
-		 if(command.equals("buy2")){
-			 product.add(new Product("Especial",40000));
-			 JOptionPane.showMessageDialog(this, "Añadido");
-		 }
-		 if(command.equals("buy3")){
-			 product.add(new Product("Refresco",6500));
-			 JOptionPane.showMessageDialog(this, "Añadido");
-		 }
-		 if(command.equals("buy4")){
-			 product.add(new Product("Arroz chino",50000));
-			 JOptionPane.showMessageDialog(this, "Añadido");
-		 }
-		 if(command.equals("buy5")){
-			 product.add(new Product("Papas Fritas",5000));
-			 JOptionPane.showMessageDialog(this, "Añadido");
-		 }
 		 
-		if(command.equals(ACCEPT)){
-			try{
-				String Cliente = JOptionPane.showInputDialog(this, "Cliente: ");
-				if(!(Cliente.equals(" "))){
-					setCliente(Cliente);
-					p.salir();
+		String command = e.getActionCommand();
+		File archivo = new File("data/Factura.txt");
+		JTextArea info2 = new JTextArea("FACTURA\n");
+		
+		int total =0;
+			if(command.equals("buy0")){
+				 product.add(new Product("Italiana",30000));
+				 
+				 JOptionPane.showMessageDialog(this, "Añadido");
+			 }
+			 if(command.equals("buy1")){
+				 product.add(new Product("Napolitana",35000));
+				 
+				 JOptionPane.showMessageDialog(this, "Añadido");
+			 }
+			 if(command.equals("buy2")){
+				 product.add(new Product("Especial",40000));
+				
+				 JOptionPane.showMessageDialog(this, "Añadido");
+			 }
+			 if(command.equals("buy3")){
+				 product.add(new Product("Refresco",6500));
+				 
+				 JOptionPane.showMessageDialog(this, "Añadido");
+			 }
+			 if(command.equals("buy4")){
+				 product.add(new Product("Arroz chino",50000));
+				 
+				 JOptionPane.showMessageDialog(this, "Añadido");
+			 }
+			 if(command.equals("buy5")){
+				 product.add(new Product("Papas Fritas",5000));
+				 
+				 JOptionPane.showMessageDialog(this, "Añadido");
+			 }
+			 
+			if(command.equals(ACCEPT)){
+				try{
+					String Cliente = JOptionPane.showInputDialog(this, "Cliente: ");
+					if(!(Cliente.equals(" "))){
+						setCliente(Cliente);
+				
+				for(int i=0; i<product.size();i++){
+					
+					total += product.get(i).getValor();
+		info2.append("\n" + product.get(i).getNombre() + "                 " + product.get(i).getValor());
 				}
-				else{
-					JOptionPane.showMessageDialog(this, "Escriba un nombre");
-				}
-				}
-				catch(Exception ex){
-					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
-				}
-		 }
+				
+		info2.append("\n" + "Cantidad de Productos comprados" + "          " + product.size());
+		info2.append("\n" + "Total a pagar" + "                            " + total);
+		
+		info2.setEditable(false);
+		
+		JScrollPane js = new JScrollPane(info2);
+		
+						JFrame aux = new JFrame();
+				
+				aux.setSize(300,300);
+				aux.setLayout(new BorderLayout());
+				aux.add(js, BorderLayout.CENTER);
+		
+				aux.setVisible(true);
+						p.salir();
+						
+					}
+					else{
+						JOptionPane.showMessageDialog(this, "Escriba un nombre");
+					}
+					}
+					catch(Exception ex){
+						JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
+					}
+			 }
+		 
 	}
 
 
