@@ -1,10 +1,14 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.Domicilie;
@@ -16,18 +20,17 @@ import model.Graph;
 import model.Product;
 import model.Vertex;
 
-public class Main extends JFrame{
+public class Main extends JFrame implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 
 	private City city;
-	
 	private Products_Panel productsPanel;
 	private Options_Panel optionsPanel;
 	private Panel_Datos datos;
-	
 	private Graph<Domicilie<Deliver>,String> graph ;
-	
+	private PanelFondo imagenFondo;
+	private JFrame aux;
 	public Main(){
 		
 		city = new City(this);		
@@ -42,8 +45,11 @@ public class Main extends JFrame{
 		
 		productsPanel=new Products_Panel(this);
 		optionsPanel=new Options_Panel(this);
+		imagenFondo = new PanelFondo(this);
 		
 		datos = new Panel_Datos();
+		
+		aux = new JFrame();
 		
 		add(optionsPanel,BorderLayout.WEST);
 		
@@ -55,15 +61,29 @@ public class Main extends JFrame{
 	 public Graph<Domicilie<Deliver>, String> getGraph() {
 		return graph;
 	}
+	 
+	 public void showStarted(){
+		 
+		 aux.setSize(600,600);
+		 aux.setLayout(new BorderLayout());
+		 aux.add(imagenFondo,BorderLayout.CENTER);	
+		 
+		 this.setVisible(false);
+		 aux.setVisible(true);
+	 }
 
 	public static void main(String[] args) {
-		 
-//		 Main v = new Main();
-//		 v.setVisible(true);
 		
+		 Main v = new Main();
+		 v.setVisible(true);
+		 v.showStarted();
+
 	 }
 	 
-	 
+	 public JFrame getAux(){
+		 
+		 return aux;
+	 }
 	
 	 public void showFrame(){
 		 productsPanel.setVisible(true);
@@ -127,5 +147,11 @@ public class Main extends JFrame{
 	
 	public void setCliente (){
 		productsPanel.setCliente(null);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
