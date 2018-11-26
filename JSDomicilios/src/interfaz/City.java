@@ -53,6 +53,7 @@ public class City extends JPanel implements MouseListener{
 		ImageIcon fondo = new ImageIcon("data/fondo4.png");
 		g.drawImage(fondo.getImage(), 0, 0, main.getWidth(), main.getHeight(), null);
 	}
+	
 	 public void R_repaint(int tope, Matrices arboles){
 		 for (int j = 0; j < tope; j++) {  
 			 for (int k = 0; k < tope; k++) {     
@@ -251,20 +252,15 @@ public class City extends JPanel implements MouseListener{
 	
 	public void PintarFloyd(){
 			
-		try{	
 			if(tope>2){
 			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
-//			FloydWarshall floyd = new FloydWarshall();
-//			floyd.executar();
-//			main.acumulado(""+floyd.getAcumulado());
+			FloydWarshall floyd = new FloydWarshall(arboles.getmAdyacencia());
+			floyd.executar();
+			floyd.preguntar(permanente, nodoFin);
+			main.acumulado(""+floyd.getAcumulado());
 		
-			}
-			else JOptionPane.showMessageDialog(null,"No hay Domicilios ... ");
-		}
-		catch(Exception e){
-			JOptionPane.showMessageDialog(null,"algo esta mal");
-		}
+	}
 	}
 	
 	public void R_paint(){
