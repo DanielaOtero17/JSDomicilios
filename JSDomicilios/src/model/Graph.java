@@ -5,6 +5,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+
 
 public class Graph<E,T>{
 	
@@ -30,8 +32,13 @@ public class Graph<E,T>{
 	
 	private Vertex<E,T> addVertex(E data, int id){
 		Vertex<E,T> vertex = new Vertex<E,T>(data, id);
-		Domicilie<Vertex<E,T>> node = vertexList.addDomicilie(vertex);
-		vertex.setPosition(node);
+		if(!contain(vertex)){
+			Domicilie<Vertex<E,T>> node = vertexList.addDomicilie(vertex);
+			vertex.setPosition(node);
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Mismo Vertice");
+		}
 		return vertex;
 	}
 	
@@ -375,11 +382,11 @@ public class Graph<E,T>{
 	
 	
 	public String toString(){
-		String output = "Vertices:\n";
-		for(Vertex<E,T> v : vertices_array())
-			output += String.format("%s ", v.toString());
-		
-		output += "\nEdges:\n";
+//		String output = "         Vertices:\n";
+//		for(Vertex<E,T> v : vertices_array())
+//			output += String.format("%s ", v.toString())+ "\n";
+		String output = "";
+		output += "            Edges:\n";
 		
 		for(Edge<E,T> e : edges_array()){
 			output += String.format("%s\n", e.toString());

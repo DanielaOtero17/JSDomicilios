@@ -32,6 +32,7 @@ public class Products_Panel extends JFrame implements ActionListener {
 		setBackground(Color.WHITE);
 		setVisible(false);
 		setResizable(false);
+		setTitle("Tienda");
 		String[] data = new String[6];
 		data[0]="P. Italiana";
 		data[1]="P. Napolitana";
@@ -41,6 +42,8 @@ public class Products_Panel extends JFrame implements ActionListener {
 		data[5]="Papitas";
 		cliente=null;
 		product = new ArrayList<Product>();
+		
+		setLocationRelativeTo(null);
 		
 		matPanel=new JPanel[HIGH][WIDTH];
 		setLayout(new BorderLayout());
@@ -111,7 +114,7 @@ public class Products_Panel extends JFrame implements ActionListener {
 		 
 		if(command.equals(ACCEPT)){
 			try{
-				String Cliente = JOptionPane.showInputDialog(this, "Cliente: ");
+				String Cliente = JOptionPane.showInputDialog(this, "Registre el nombre: ");
 				if(!(Cliente.equals(" "))){
 					setCliente(Cliente);
 					p.salir();

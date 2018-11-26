@@ -27,7 +27,7 @@ public class City extends JPanel implements MouseListener{
 	public Main main;
 	
 	private Matrices arboles;
-	private int tope=0;  
+	private int tope=1;  
 	 
 	private int nodoFin;   
 	 
@@ -52,8 +52,10 @@ public class City extends JPanel implements MouseListener{
 		super.paint(g);
 		ImageIcon fondo = new ImageIcon("data/fondo4.png");
 		g.drawImage(fondo.getImage(), 0, 0, main.getWidth(), main.getHeight(), null);
+		Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(0), arboles.getCordeY(0),String.valueOf(arboles.getNombre(0)));
 	}
 	 public void R_repaint(int tope, Matrices arboles){
+		 
 		 for (int j = 0; j < tope; j++) {  
 			 for (int k = 0; k < tope; k++) {     
 				 if(arboles.getmAdyacencia(j, k) == 1)
@@ -66,7 +68,6 @@ public class City extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
 	}
 
 	@Override
@@ -83,62 +84,58 @@ public class City extends JPanel implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent evt) {
-		
-		if(main.iniciarPedido().getName()!=null){
-//			if(main.iniciarPedido().getName().equals(main.nCliente())){
-//				JOptionPane.showMessageDialog(null,"Ordenes no pueden ser iguales");
-//			}
-//			else{
-		
-		Vertex<Domicilie<Deliver>,String> v = null;
-		Vertex<Domicilie<Deliver>,String> v2 = null;
-		
-		int xxx, yyy;   	       
-		xxx=evt.getX();	      
-		yyy=evt.getY();	      
-		if(evt.isMetaDown()){	          
-			clicIzqSobreNodo(xxx, yyy );            	          
-			if(nn==2){	              
-				nn=0;	               
-				Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente, nodoFin,this);	              
-				Dijkstra.dijkstra();	              
-				main.acumulado(""+Dijkstra.getAcumulado());	               	           
-			}	       
-		}	       
-		else{       
-			if(!cicDerechoSobreNodo(xxx,yyy)){          
-				if(tope<50){	               
-					arboles.setCordeX(tope,xxx);	              
-					arboles.setCordeY(tope,yyy);	              
-					arboles.setNombre(tope, main.iniciarPedido().getName());	            
-					Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(tope), arboles.getCordeY(tope),String.valueOf(arboles.getNombre(tope)));	          
-					tope++; 
-					v = main.getGraph().addVertex(new Domicilie<Deliver>(main.iniciarPedido()));
-				} 	         
-				else JOptionPane.showMessageDialog(null,"Se ha llegado al Maximo de nodos..");	       
-			}          
-			if(n==2 ){	             
-				n=0; 	             
-				int  ta = ingresarTamano("Ingrese Distancia (Km)");	             
-				if(aristaMayor < ta) aristaMayor=ta;	            				
-				arboles.setmAdyacencia(id2, id, 1);	            
-				arboles.setmAdyacencia(id, id2, 1);	             
-				arboles.setmCoeficiente(id2, id,ta );	             
-				arboles.setmCoeficiente(id, id2, ta);
-				
-				Pintar.pintarLinea(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id), arboles.getCordeX(id2), arboles.getCordeY(id2), ta); 	             
-				Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id),String.valueOf(arboles.getNombre(id)));	             
-				Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id2), arboles.getCordeY(id2),String.valueOf(arboles.getNombre(id2)));	
-//				Edge<Domicilie<Deliver>,String> e1[] = main.getGraph().addEdge(v2, v);
-				id=-1;	              
-				id2=-1;
-			}	        
+		try{
+			
+			int xxx, yyy;   	       
+			xxx=evt.getX();	      
+			yyy=evt.getY();	 
+			
+			if(main.iniciarPedido().getName()!=null){
+			
+			if(evt.isMetaDown()){	          
+				clicIzqSobreNodo(xxx, yyy );            	          
+				if(nn==2){	              
+					nn=0;	               
+					Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente, nodoFin,this);	              				
+					Dijkstra.dijkstra();	              				
+					main.acumulado(""+Dijkstra.getAcumulado());	               	           			
+				}	       		
+			}	       		
+			else{       			
+				if(!cicDerechoSobreNodo(xxx,yyy)){ 
+					if(tope<50){
+						arboles.setCordeX(tope,xxx);	              					
+						arboles.setCordeY(tope,yyy);	              				
+						arboles.setNombre(tope, main.iniciarPedido().getName());	            					
+						Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(tope), arboles.getCordeY(tope),String.valueOf(arboles.getNombre(tope)));	          					
+						main.añadirVertices(tope);
+						tope++;
+					} 	         				
+					else JOptionPane.showMessageDialog(null,"Se ha llegado al Maximo de nodos..");		
+				}          			
+				if(n==2 ){	             			
+					n=0; 	             				
+					int  ta = ingresarTamano("Ingrese Distancia (Km)");	             				
+					if(aristaMayor < ta) aristaMayor=ta;	            									
+					arboles.setmAdyacencia(id2, id, 1);	            				
+					arboles.setmAdyacencia(id, id2, 1);	             				
+					arboles.setmCoeficiente(id2, id,ta );	             				
+					arboles.setmCoeficiente(id, id2, ta);				
+					Pintar.pintarLinea(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id), arboles.getCordeX(id2), arboles.getCordeY(id2), ta); 	             				
+					main.añadirAristas(id,id2,tope);
+					Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id),String.valueOf(arboles.getNombre(id)));	             			
+					Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id2), arboles.getCordeY(id2),String.valueOf(arboles.getNombre(id2)));
+					id=-1;	              
+					id2=-1;
+				}
+			}
+			}
+			else  JOptionPane.showMessageDialog(null,"Realize un pedido");
+			main.mostrarDatos();
+			main.setCliente(tope);
 		}
-		main.setCliente();
-		main.mostrarDatos();
-		}
-		else{
-			JOptionPane.showMessageDialog(null,"Debe inicarse una orden");	  
+		catch(Exception e){
+			JOptionPane.showMessageDialog(null,"Realize un pedido");
 		}
 	}
 
@@ -192,7 +189,7 @@ public class City extends JPanel implements MouseListener{
 		return tamano;	   
 	}
 	
-	public boolean cicDerechoSobreNodo(int xxx,int yyy){ 		
+	public boolean cicDerechoSobreNodo(int xxx,int yyy){ 
 		for (int j = 0; j < tope; j++) { 
 	            
 			if((xxx+2) > arboles.getCordeX(j) && xxx < (arboles.getCordeX(j)+13) && (yyy+2) > arboles.getCordeY(j) && yyy<(arboles.getCordeY(j)+13) ) {	                                       	               
@@ -221,7 +218,7 @@ public class City extends JPanel implements MouseListener{
 	}  
 	
 	
-	public void clicIzqSobreNodo(int xxx, int yyy){          
+	public void clicIzqSobreNodo(int xxx, int yyy){
 		for (int j = 0; j <tope; j++) {	             
 			if((xxx+2) > arboles.getCordeX(j) && xxx < (arboles.getCordeX(j)+13) && (yyy+2) > arboles.getCordeY(j) && yyy<(arboles.getCordeY(j)+13) ) {	             
 				if(nn==0){	            
