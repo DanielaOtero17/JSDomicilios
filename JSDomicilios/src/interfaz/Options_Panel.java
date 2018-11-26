@@ -140,7 +140,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 						interfaz.recorrerDijkstra();
 					}
 					else if(cliente.equals("2")){
-						interfaz.recorrerFloyd();
+						interfaz.recorrerKruskal();
 					}
 					else{
 						JOptionPane.showMessageDialog(this, "Solo se puede escribir 1 ò 2");

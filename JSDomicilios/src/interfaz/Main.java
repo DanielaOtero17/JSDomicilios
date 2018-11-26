@@ -122,7 +122,7 @@ public class Main extends JFrame implements ActionListener{
 		 city.pintarDijkstra();
 	 }
 	 
-	 public void recorrerFloyd(){
+	 public void recorrerKruskal(){
 		 city.PintarKruskal();
 	 }
 	 
