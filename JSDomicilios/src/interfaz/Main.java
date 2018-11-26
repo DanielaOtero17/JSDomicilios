@@ -78,40 +78,10 @@ public class Main extends JFrame implements ActionListener{
 
 	public static void main(String[] args) {
 		
-//		 Main v = new Main();
-//		 v.setVisible(true);
+		 Main v = new Main();
+		 v.setVisible(true);
 //		 v.showStarted();
 		 
-
-		Graph<Domicilie<Deliver>,String> graph = new Graph<Domicilie<Deliver>,String>(true);
-		
-		Vertex<Domicilie<Deliver>,String> v1 = graph.addVertex(new Domicilie<Deliver>(new Deliver("A")));
-		Vertex<Domicilie<Deliver>,String> v2 = graph.addVertex(new Domicilie<Deliver>(new Deliver("B")));
-		
-		Vertex<Domicilie<Deliver>,String> v3 = graph.addVertex(new Domicilie<Deliver>(new Deliver("C")));
-		Vertex<Domicilie<Deliver>,String> v4 = graph.addVertex(new Domicilie<Deliver>(new Deliver("D")));
-		
-		Edge<Domicilie<Deliver>,String> e1[] = graph.addEdge(v1, v2,null,12);
-		
-		Edge<Domicilie<Deliver>,String> e2[] = graph.addEdge(v3, v4,null,27);
-		
-		Edge<Domicilie<Deliver>,String> e3[] = graph.addEdge(v4, v1,null,87);
-		
-		Edge<Domicilie<Deliver>,String> e4[] = graph.addEdge(v2, v4,null,32);
-		
-		Edge<Domicilie<Deliver>,String> e5[] = graph.addEdge(v3, v1,null,38);
-		
-		
-		System.out.println(graph);
-		
-		System.out.println("Kruskal");
-		
-		Kruskal<Domicilie<Deliver>,String> k = new Kruskal<Domicilie<Deliver>,String>();
-		
-		System.out.println(k.obtenerARM(graph));
-		
-		
-		System.out.println(k.acumulado);
 
 	 }
 	 
@@ -153,7 +123,7 @@ public class Main extends JFrame implements ActionListener{
 	 }
 	 
 	 public void recorrerFloyd(){
-		 city.PintarFloyd();
+		 city.PintarKruskal();
 	 }
 	 
 	 public void mostrarDatos(){
@@ -164,6 +134,10 @@ public class Main extends JFrame implements ActionListener{
 	public City getCity() {
 		return city;
 	
+	}
+	
+	public Panel_Datos panelDatos(){
+		return datos;
 	}
 	
 	public Vertex<Domicilie<Deliver>, String > inicial(){

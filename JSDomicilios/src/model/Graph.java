@@ -1,5 +1,8 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -505,5 +508,37 @@ public class Graph<E,T>{
     }
 	
 	
-	
+	public int[][] cargarMatriz(File archivo)throws Exception {
+		FileReader reader = new FileReader("data/" + archivo);
+		BufferedReader leitor = new BufferedReader(reader);
+
+		String line;
+		Integer fila = 0;
+		Integer columna;
+		
+		Integer numeroDeVertices = Integer.parseInt(leitor.readLine().trim());
+		
+		int[][] matrizDeAdjacencia = new int[numeroDeVertices][numeroDeVertices];
+		
+		while ((line = leitor.readLine()) != null) {
+		
+			columna = 0;
+
+			String[] splitted = line.split("\\s");
+
+			for (int i = 0; i < splitted.length; i++) {
+
+					
+				Integer valor = Integer.parseInt(splitted[i].trim());
+				
+				matrizDeAdjacencia[fila][columna] = valor;
+
+				
+				columna++;
+			}
+
+			fila++;
+		}
+		return matrizDeAdjacencia;
+	}
 }

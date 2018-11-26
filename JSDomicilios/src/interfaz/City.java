@@ -13,6 +13,7 @@ import model.Algoritmo_Dijkstra;
 import model.Domicilie;
 import model.Edge;
 import model.FloydWarshall;
+import model.Kruskal;
 import model.Matrices;
 import model.Deliver;
 import model.Graph;
@@ -247,15 +248,13 @@ public class City extends JPanel implements MouseListener{
 		else JOptionPane.showMessageDialog(null,"Se deben de crear mas nodos ... ");
 	}
 	
-	public void PintarFloyd(){
+	public void PintarKruskal(){
 			
 			if(tope>2){
 			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
-			FloydWarshall floyd = new FloydWarshall(arboles.getmIncidencia());
-			floyd.executar();
-			floyd.preguntar(permanente, nodoFin);
-			main.acumulado(""+floyd.getAcumulado());
+			Kruskal<Domicilie<Deliver>,String> k = new Kruskal<Domicilie<Deliver>,String>();
+			main.panelDatos().setDatos2(k.obtenerARM(main.getGraph()).toString());
 		
 	}
 	}
