@@ -144,6 +144,8 @@ public class Products_Panel extends JFrame implements ActionListener {
 		
 		JScrollPane js = new JScrollPane(info2);
 		
+		info2.setText("FACTURA\n");
+		
 						JFrame aux = new JFrame();
 				
 				aux.setSize(300,300);
