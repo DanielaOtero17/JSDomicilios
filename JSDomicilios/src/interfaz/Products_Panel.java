@@ -142,10 +142,8 @@ public class Products_Panel extends JFrame implements ActionListener {
 		
 		info2.setEditable(false);
 		
-		JScrollPane js = new JScrollPane(info2);
-		
-		info2.setText("FACTURA\n");
-		
+		product.clear();
+		JScrollPane js = new JScrollPane(info2);		
 						JFrame aux = new JFrame();
 				
 				aux.setSize(300,300);
