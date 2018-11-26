@@ -2,11 +2,11 @@ package model;
 
 import model.Vertex;
 
-public class Edge<E,T> {
+public class Edge<E,T> implements Comparable<Edge<E,T>> {
 	
 	private Vertex<E,T> v1, v2;
 	private T label;
-	private double weight;
+	private int weight;
 	private int status;
 	
 	public static final int UNDISCOVERED = 0;
@@ -57,11 +57,11 @@ public class Edge<E,T> {
 		this.label = label;
 	}
 
-	public double getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
@@ -91,5 +91,11 @@ public class Edge<E,T> {
 	
 	public String toString(){
 		return label == null ? String.format("(%s, %s)", v1.toString(),v2.toString()) : String.format("(%s)", label);
+	}
+
+	@Override
+	public int compareTo(Edge<E, T> e) {
+		
+		return this.getWeight() - e.getWeight();
 	}
 }

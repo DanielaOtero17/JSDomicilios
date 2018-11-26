@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -42,7 +43,7 @@ public class Graph<E,T>{
 		return vertex;
 	}
 	
-	public Edge<E,T>[] addEdge(Vertex<E,T> v1, Vertex<E,T> v2, T label, double weight){
+	public Edge<E,T>[] addEdge(Vertex<E,T> v1, Vertex<E,T> v2, T label, int weight){
 		Edge<E,T> edges[] = new Edge[directed ? 1 : 2];
 		
 		edges[0] = new Edge<E,T>(v1, v2);
@@ -61,7 +62,7 @@ public class Graph<E,T>{
 	}
 	
 	public Edge<E,T>[] addEdge(Vertex<E,T> v1, Vertex<E,T> v2){
-		return addEdge(v1, v2, null, 0.0);
+		return addEdge(v1, v2, null, 0);
 	}
 	
 	public Vertex<E,T>[] BFS(Vertex<E,T> vertex){
@@ -288,6 +289,63 @@ public class Graph<E,T>{
 		DFS();
 		return isCyclic;
 	}	
+	
+	public boolean isConnected(){
+		if(directed)
+			BFS_DiGraph_helper();
+		else
+			DFS();
+		return isConnected;
+	}
+	
+	private Vertex<E,T>[] BFS_DiGraph_helper() {
+		Vertex<E,T>[] BFS = new Vertex[vertexList.getSize()];
+		int index = 0;
+		
+		this.connectedComponents = 0;
+		
+		Iterator<Vertex<E,T>> iterV = vertices();
+		while (iterV.hasNext())
+			iterV.next().setStatus(Vertex.UNVISITED);
+
+		Iterator<Edge<E,T>> iterE = edges();
+		while (iterE.hasNext())
+			iterE.next().setStatus(Edge.UNDISCOVERED);
+
+		iterV = vertices();
+		while (iterV.hasNext()) {
+			Vertex<E,T> current = iterV.next();
+			if (current.getStatus() == Vertex.UNVISITED) {
+				
+				this.connectedComponents++;
+				this.isConnected = this.connectedComponents == 1;
+				
+				Queue<Vertex<E,T>> q = new LinkedList<Vertex<E,T>>();
+				q.add(current);
+				current.setStatus(Vertex.VISITING);
+				while (!q.isEmpty()) {
+					Vertex<E,T> polled = q.poll();
+					BFS[index++] = polled;
+					polled.setStatus(Vertex.VISITED);
+
+					Iterator<Edge<E,T>> inOutEdges = polled.getOutEdges().concatenate(polled.getInEdges());
+					while (inOutEdges.hasNext()) {
+						Edge<E,T> edge = inOutEdges.next();
+						Vertex<E,T> oppositeVertex = edge.getOpposite(polled);
+						if (oppositeVertex.getStatus() == Vertex.UNVISITED) {
+							edge.setStatus(Edge.DISCOVERED);
+							oppositeVertex.setStatus(Vertex.VISITING);
+							q.offer(oppositeVertex);
+						} else {
+							if (edge.getStatus() == Edge.UNDISCOVERED)
+								edge.setStatus(Edge.CROSS);
+						}
+					}
+				}
+			}
+		}
+		return BFS;
+	}
 
 	public void dijkstra(Vertex<E,T> v){
 		
@@ -344,6 +402,17 @@ public class Graph<E,T>{
 		}
 	}
 	
+
+	public boolean areAdjacent(Vertex<E,T> v1, Vertex<E,T> v2){
+		Vertex<E,T> v = directed || (v1.getOutEdges().size() < v2.getOutEdges().size()) ? v1 : v2;
+		
+		Iterator<Edge<E,T>> iterOutE = v.getOutEdges();
+		while(iterOutE.hasNext())
+			if( (v == v1 && iterOutE.next().getV2() == v2) || (v == v2 && iterOutE.next().getV2() == v1) )
+				return true;
+		return false;
+	}
+	
 	public Edge<E,T>[] dijkstra(Vertex<E,T> vFrom, Vertex<E,T> vTo){
 		this.dijkstra(vFrom);
 		Stack<Edge<E,T>> path = new Stack<>();
@@ -382,10 +451,10 @@ public class Graph<E,T>{
 	
 	
 	public String toString(){
-//		String output = "         Vertices:\n";
-//		for(Vertex<E,T> v : vertices_array())
-//			output += String.format("%s ", v.toString())+ "\n";
-		String output = "";
+		String output = "         Vertices:\n";
+		for(Vertex<E,T> v : vertices_array())
+			output += String.format("%s ", v.toString())+ "\n";
+//		String output = "";
 		output += "            Edges:\n";
 		
 		for(Edge<E,T> e : edges_array()){
@@ -393,5 +462,48 @@ public class Graph<E,T>{
 		}
 		return output;
 	}
+	
+	public ArrayList<Vertex<E,T>> camino(Vertex<E,T> idOrigen, Vertex<E,T> idDestino) throws IllegalArgumentException {
+        if (!(contain(idOrigen))) {
+            throw new IllegalArgumentException("Error en camino: algún vértice no existe.");
+        }
+        if (idOrigen == idDestino) {
+            throw new IllegalArgumentException("Error en camino: deben ser identificadores diferentes.");
+        }
+
+        int[] predecesores = new int[this.vertices_array().length];
+
+        ArrayList<Vertex<E,T>> Q = new ArrayList<>();
+        boolean[] visitado = new boolean[this.vertices_array().length];
+        for (int i = 0; i < visitado.length; i++) {
+            visitado[i] = false;
+        }
+        Vertex<E,T> v =idDestino;
+        Q.add(v);
+        visitado[idDestino.getID()] = true;
+        Vertex<E,T> t = null;
+        while (!Q.isEmpty() && (t = Q.get(0)).getID() != idOrigen.getID()) {
+            Q.remove(t);
+            for (Vertex<E,T> u : vertices_array()) {
+                if (!visitado[u.getID()]) {
+                    predecesores[u.getID()] = t.getID();
+                    visitado[u.getID()] = true;
+                    Q.add(u);
+                }
+            }
+        }
+        ArrayList<Vertex<E,T>> camino = new ArrayList<>();
+        int id = t.getID();
+        if (id == idOrigen.getID()) {
+            while (id != idDestino.getID()) {
+                camino.add(idDestino);
+                id = predecesores[id];
+            }
+            camino.add(idOrigen);
+        }
+        return camino;
+    }
+	
+	
 	
 }

@@ -5,7 +5,7 @@ public class Vertex<E,T> implements Comparable<Vertex<E,T>> {
 	private E data;
 	private int status;
 	private int color;
-	private final int id;
+	private int id;
 	
 	private Auxiliar<Edge<E,T>> inEdges,outEdges;
 	private Domicilie<Vertex<E,T>> position;
@@ -93,9 +93,12 @@ public class Vertex<E,T> implements Comparable<Vertex<E,T>> {
 		this.color = color;
 	}
 	
-
 	public int getID(){
 		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 	protected void removeInEdge(Domicilie <Edge<E,T>> node){

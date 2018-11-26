@@ -252,7 +252,7 @@ public class City extends JPanel implements MouseListener{
 			if(tope>2){
 			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
-			FloydWarshall floyd = new FloydWarshall(arboles.getmAdyacencia());
+			FloydWarshall floyd = new FloydWarshall(arboles.getmIncidencia());
 			floyd.executar();
 			floyd.preguntar(permanente, nodoFin);
 			main.acumulado(""+floyd.getAcumulado());

@@ -83,6 +83,10 @@ public class Matrices {
     public int[][] getmAdyacencia() {
     	return mAdyacencia;
     }
+    
+    public int[][] getmIncidencia() {
+    	return mCoeficiente;
+    }
 
     public void setmAdyacencia(int[][] mAdyacencia) {
     	this.mAdyacencia = mAdyacencia;

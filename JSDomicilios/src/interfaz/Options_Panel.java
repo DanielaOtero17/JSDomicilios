@@ -143,7 +143,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 						interfaz.recorrerFloyd();
 					}
 					else{
-						JOptionPane.showMessageDialog(this, "Solo se puede esccribir 1 ò 2");
+						JOptionPane.showMessageDialog(this, "Solo se puede escribir 1 ò 2");
 					}
 				}
 				else{
@@ -151,6 +151,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 				}
 				}
 				catch(Exception ex){
+					ex.printStackTrace();
 					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
 				}
 		}

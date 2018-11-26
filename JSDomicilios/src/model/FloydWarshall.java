@@ -4,7 +4,7 @@ public class FloydWarshall {
 
 	private int[][] matrizAdjacencia;
 
-	private int[][] matrizSaida;
+	private int[][] matrizSalida;
 	private int[] vect1;
 	private int[] vect2;
 	private int[][] A;
@@ -24,9 +24,9 @@ public class FloydWarshall {
 
 		int bucle,i,j,suma;
 		
-	for(bucle=1;bucle<=n;bucle++){
+	for(bucle=0;bucle<=n;bucle++){
 		
-		for(i=1;i<=n;i++){
+		for(i=0;i<=n;i++){
 			
 			vect1[i]= A[bucle][i];
 			vect2[i]= A[i][bucle];

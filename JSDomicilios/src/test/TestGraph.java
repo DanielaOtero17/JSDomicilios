@@ -41,20 +41,6 @@ public class TestGraph{
 		
 		e5 = graph.addEdge(v5, v6,null,38);
 		
-		
-		
-//		System.out.println();
-//		System.out.println("Dijkstra");
-//		Vertex<Domicilie<Deliver>,String> v[] = graph.vertices_array();
-//		for(Edge<Domicilie<Deliver>,String> e : graph.dijkstra(v[0], v[2])){
-//			System.out.println(e);
-//		}
-//		System.out.println("-------------------------------");
-//		System.out.println(String.format("Total distance: %.2f meters", v[2].getDijkstra_value()));
-//		System.out.println("-------------------------------");
-//		
-//		System.out.println("Is cyclic: "+graph.isCyclic());
-		
 	}
 	@Test
 	public void sceneOne(){
@@ -171,7 +157,6 @@ public class TestGraph{
 	
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void sceneNine(){
 
@@ -192,10 +177,6 @@ public class TestGraph{
 		Edge<Domicilie<Deliver>,String> e10[] = graph1.addEdge(v11, v7,null,5);
 		
 		Vertex<Domicilie<Deliver>,String> v[] = graph1.vertices_array();
-		
-		for(Edge<Domicilie<Deliver>,String> e : graph1.dijkstra(v[0], v[3])){
-			System.out.println(e);
-		}
 		
 		graph1.dijkstra(v[0], v[3]);
 		Double vr = 35.0;
