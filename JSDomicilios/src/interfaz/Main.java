@@ -32,7 +32,7 @@ public class Main extends JFrame{
 	private Options_Panel optionsPanel;
 	private Panel_Datos datos;
 	private Graph<Domicilie<Deliver>,String> graph ;
-	private Info_Products info;
+	
 	public Main(){
 		
 		
@@ -43,7 +43,6 @@ public class Main extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
-		info = new Info_Products(this);
 		city = new City(this);		
 		productsPanel= new Products_Panel(this);
 		optionsPanel=new Options_Panel(this);
@@ -72,7 +71,7 @@ public class Main extends JFrame{
 	 }
 	
 	 public void showFrame(){
-		 info.setVisible(true);
+		 productsPanel.setVisible(true);
 	 }
 	 
 	 public Products_Panel getProductsPanel(){
@@ -82,7 +81,11 @@ public class Main extends JFrame{
 	 
 	 public Product[] products(){
 		 
-		 Product[] products = productsPanel.getProducts();
+		 Product[] products = new Product[productsPanel.getProduct().size()];
+		 
+		 for(int i =0;i<productsPanel.getProduct().size();i++){
+			 products[i]=productsPanel.getProduct().get(i);
+		 }
 		 return products;
 	 }
 	
