@@ -1,25 +1,13 @@
 package interfaz;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashSet;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import model.Domicilie;
 import model.Edge;
-import model.FloydWarshall;
-import model.Kruskal;
+import model.Graph;
 import model.Matrices;
 import model.Deliver;
-import model.Graph;
-import model.Pintar;
 import model.Product;
 import model.Vertex;
 
