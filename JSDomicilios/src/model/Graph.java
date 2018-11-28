@@ -150,7 +150,10 @@ public class Graph<E,T>{
 				current.setStatus(Vertex.VISITING);
 				while(!q.isEmpty()){
 					Vertex<E,T> polled = q.poll();
-					BFS[index++] = polled;
+					BFS[index] = polled;
+					System.out.println(index);
+					index++;
+					
 					polled.setStatus(Vertex.VISITED);
 					
 					Iterator<Edge<E,T>> incidentEdges = polled.getOutEdges();
@@ -176,6 +179,10 @@ public class Graph<E,T>{
 		return BFS;
 	}
 	
+	public Auxiliar<Vertex<E, T>> getVertexList() {
+		return vertexList;
+	}
+
 	public Vertex<E,T>[] DFS(){
 		Vertex<E,T>[] DFS = new Vertex[vertexList.getSize()];
 		int index[] = {0};

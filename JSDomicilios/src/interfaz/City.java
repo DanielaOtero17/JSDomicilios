@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Algoritmo_Dijkstra;
+import model.Algoritmo_Prim;
 import model.Domicilie;
 import model.Edge;
 import model.FloydWarshall;
@@ -245,8 +246,17 @@ public class City extends JPanel implements MouseListener{
 			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
 			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID fin No existe",tope);	           
 			Algoritmo_Dijkstra Dijkstra = new Algoritmo_Dijkstra(arboles,tope,permanente,nodoFin,this);	            
-			Dijkstra.dijkstra();	           
-			main.acumulado(""+Dijkstra.getAcumulado());
+			Dijkstra.dijkstra();	
+			
+			
+			 Vertex<Domicilie<Deliver>,String> v[] = main.getGraph().vertices_array();
+				for(Edge<Domicilie<Deliver>,String> e : main.getGraph().dijkstra(v[permanente], v[nodoFin])){
+					System.out.println(e);
+				}
+				System.out.println("-------------------------------");
+				System.out.println(String.format("Total distance: %.2f meters", v[nodoFin].getDijkstra_value()));
+
+
 		}
 		else JOptionPane.showMessageDialog(null,"Se deben de crear mas nodos ... ");
 	}
@@ -262,13 +272,17 @@ public class City extends JPanel implements MouseListener{
 	}
 	
 	public void PintarPrim(){
-		Prim<Domicilie<Deliver>,String> p = new Prim<Domicilie<Deliver>,String>();
+//		Prim<Domicilie<Deliver>,String> p = new Prim<Domicilie<Deliver>,String>();
+//		permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);
+//		Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
+//		
+//		graph1 = p.obtenerARM(main.getGraph(),permanente);
+//		
+//		main.panelDatos().setDatos2(" -------- " + "Prim"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
 		permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);
-		Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
-		
-		graph1 = p.obtenerARM(main.getGraph(),permanente);
-		
-		main.panelDatos().setDatos2(" -------- " + "Prim"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
+		Algoritmo_Prim prim = new Algoritmo_Prim(arboles, permanente, tope, aristaMayor, this);
+		prim.prim();
+		main.acumulado(""+ prim.getCumulado());
 		
 	}
 	

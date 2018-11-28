@@ -156,7 +156,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 				}
 				}
 				catch(Exception ex){
-					ex.printStackTrace();
+//					ex.printStackTrace();
 					JOptionPane.showMessageDialog(this, "Algo fallo");
 				}
 		}
