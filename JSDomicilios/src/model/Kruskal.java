@@ -10,7 +10,7 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
 	}
 
 	@Override
-    public Graph<E,T> obtenerARM(Graph<E,T> G,Vertex<E,T> inicio) throws IllegalArgumentException {
+    public Graph<E,T> obtenerARM(Graph<E,T> G,int inicio) throws IllegalArgumentException {
     	
 //        if((G.isConnected())){
 //        	throw new IllegalArgumentException("Error al generar arbol recubridor minimo: el grafo no es conexo.");
@@ -31,10 +31,9 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
             PriorityQueue<Edge<E,T>> aristas = new PriorityQueue<>(m);
             for (int i = 0; i < n - 1; i++) {
                 for (int j = i + 1; j < n; j++) {
-                    if (!G.areAdjacent(inicio,G.vertices_array()[j])) {
+                    if (!G.areAdjacent(G.vertices_array()[inicio],G.vertices_array()[j])) {
                     	int peso =G.edges_array()[j].getWeight();
-                    	Edge<E,T> e = new Edge<>(inicio, G.vertices_array()[j]);
-                    	inicio =G.vertices_array()[i];
+                    	Edge<E,T> e = new Edge<>(G.vertices_array()[inicio], G.vertices_array()[j]);
                     	e.setWeight(peso);
                         aristas.add(e);
                     
