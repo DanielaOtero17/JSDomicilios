@@ -134,7 +134,7 @@ public class Vertex<E,T> implements Comparable<Vertex<E,T>> {
 	}
 	
 	public String toString(){
-		return String.format("<%s>", data.toString());
+		return id + " " + String.format("<%s>", data.toString());
 	}
 
 	@Override

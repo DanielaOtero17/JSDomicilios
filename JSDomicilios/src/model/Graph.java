@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -29,6 +32,8 @@ public class Graph<E,T>{
 
 	private String[] cordeY ;
 	
+	private int[][] coeficiente ;
+	
 	private int unique_id = 0;
 	
 	public Graph(boolean directed) {
@@ -39,6 +44,7 @@ public class Graph<E,T>{
 	
 	public Vertex<E,T> addVertex(E data){
 		return addVertex(data,unique_id++);
+		
 	}
 	
 	private Vertex<E,T> addVertex(E data, int id){
@@ -48,9 +54,11 @@ public class Graph<E,T>{
 			vertex.setPosition(node);
 		}
 		else{
-			JOptionPane.showMessageDialog(null, "Mismo Vertice");
+//			JOptionPane.showMessageDialog(null, "Mismo Vertice");
 		}
+		
 		return vertex;
+		
 	}
 	
 	public Edge<E,T>[] addEdge(Vertex<E,T> v1, Vertex<E,T> v2, T label, int weight){
@@ -418,8 +426,9 @@ public class Graph<E,T>{
 		
 		Iterator<Edge<E,T>> iterOutE = v.getOutEdges();
 		while(iterOutE.hasNext())
-			if( (v == v1 && iterOutE.next().getV2() == v2) || (v == v2 && iterOutE.next().getV2() == v1) )
+			if( (v == v1 && iterOutE.next().getV2() == v2) || (v == v2 && iterOutE.next().getV2() == v1) ){
 				return true;
+			}	
 		return false;
 	}
 	
@@ -440,9 +449,10 @@ public class Graph<E,T>{
 	}
 	
 	public boolean contain(Vertex<E,T> v){
-		Iterator<Vertex<E,T>> iter = vertices();
-		while(iter.hasNext()){
-			if(iter.next().getData()==v.getData()){
+		
+		
+		for(int i =0;i<vertices_array().length;i++){
+			if(v.getData().toString().equals(vertices_array()[i].getData().toString())){
 				return true;
 			}
 		}
@@ -461,10 +471,10 @@ public class Graph<E,T>{
 	
 	
 	public String toString(){
-//		String output = "         Vertices:\n";
-//		for(Vertex<E,T> v : vertices_array())
-//			output += String.format("%s ", v.toString())+ "\n";
-		String output = "";
+		String output = "         Vertices:\n";
+		for(Vertex<E,T> v : vertices_array())
+			output += String.format("%s ", v.toString())+ "\n";
+//		String output = "";
 		output += "            Edges:\n";
 		
 		for(Edge<E,T> e : edges_array()){
@@ -484,16 +494,19 @@ public class Graph<E,T>{
         int[] predecesores = new int[this.vertices_array().length];
 
         ArrayList<Vertex<E,T>> Q = new ArrayList<>();
-        boolean[] visitado = new boolean[this.vertices_array().length];
+        boolean[] visitado = new boolean[vertices_array().length];
         for (int i = 0; i < visitado.length; i++) {
             visitado[i] = false;
         }
+        int contador =0;
         Vertex<E,T> v =idDestino;
         Q.add(v);
         visitado[idDestino.getID()] = true;
         Vertex<E,T> t = null;
         while (!Q.isEmpty() && (t = Q.get(0)).getID() != idOrigen.getID()) {
             Q.remove(t);
+            contador++;
+            
             for (Vertex<E,T> u : vertices_array()) {
                 if (!visitado[u.getID()]) {
                     predecesores[u.getID()] = t.getID();
@@ -532,9 +545,10 @@ public class Graph<E,T>{
 		
 		int[][] matrizDeAdjacencia = new int[numeroDeVertices][numeroDeVertices];
 		
-		while ((line = leitor.readLine()) != null) {
-		
+		boolean  termino =false;
+		while (!termino) {
 			columna = 0;
+			line = leitor.readLine();
 
 			String[] splitted = line.split("\\s");
 
@@ -550,7 +564,38 @@ public class Graph<E,T>{
 			}
 
 			fila++;
+			
+			if(fila==51){
+				termino=true;
+			}
 		}
+		
+		fila=0;
+		
+		Integer numeroDeCoeficientes = Integer.parseInt(leitor.readLine().trim());
+		
+		int[][] matrizDeCoeficientes = new int[numeroDeCoeficientes ][numeroDeCoeficientes ];
+		
+				
+		while ((line = leitor.readLine())!=null) {
+			columna = 0;
+			String[] splitted = line.split("\\s");
+
+			for (int i = 0; i < splitted.length; i++) {
+
+					
+				Integer valor = Integer.parseInt(splitted[i].trim());
+				
+				matrizDeCoeficientes[fila][columna] = valor;
+
+				columna++;
+			}
+
+			fila++;
+		}
+	
+		coeficiente =matrizDeCoeficientes;
+		
 		return matrizDeAdjacencia;
 	}
 
@@ -558,25 +603,58 @@ public class Graph<E,T>{
 		return vertices;
 	}
 	
-	public void escribir(int[][] matriz, String[] nombres, int [] cordX, int[] cordY ) {
+	public int[][] getmCoeficiente() {
+		return coeficiente;
+	}
+	
+	public void escribir(int[][] matrizA,int[][] matrizI, String[] nombres, int [] cordX, int[] cordY ) {
 		 FileWriter fichero = null;
 	        PrintWriter pw = null;
+	        Calendar c = Calendar.getInstance();
+	        String dia =Integer.toString(c.get(Calendar.DATE));
+	        String mes =Integer.toString(c.get(Calendar.MONTH));
+	        String año =Integer.toString(c.get(Calendar.YEAR));
+	        
+	        int hora=c.get(Calendar.HOUR_OF_DAY);
+	        int minuto=c.get(Calendar.MINUTE);
 	        try
 	        {
-	            fichero = new FileWriter("data/Salida.txt");
+	            fichero = new FileWriter(new File("data/" +"Entregas " + año +"-"+ mes+"-"+ dia + "_" + hora +"."+ minuto + ".txt"));
 	            pw = new PrintWriter(fichero);
 	            
-	            for (int x=0; x < matriz.length; x++) {
-	            	 pw.print("|");
-	    	        for (int y=0; y < matriz[x].length; y++) {
-	    	        	pw.print(matriz[x][y]);
-	    	          if (y!=matriz[x].length-1) pw.print(" ");
-	    	        }
-	    	        pw.println("|");
+	            pw.print(matrizA.length+"");
+	    		for (int x=0; x < nombres.length; x++) {
+	    			pw.print(nombres[x]+ " ");
 	    	    }
-	            pw.println(matriz.length-1);
-
-
+	    		pw.println(); 
+	    		for (int x=0; x < cordX.length; x++) {
+	    			pw.print(cordX[x] + " ");
+	    	    }
+	    		pw.println();
+	    	    for (int y=0; y < cordY.length; y++) {
+	    	    	pw.print(cordY[y] + " ");
+	    	    }
+	    	    pw.println();
+	    	    for (int x=0; x < matrizA.length; x++) {
+	    	    	pw.print("");
+	    	        for (int y=0; y < matrizA[x].length; y++) {
+	    	        	pw.print(matrizA[x][y]+ " ");
+	    	          if (y!=matrizA[x].length) System.out.print(" ");
+	    	        }
+	    	        pw.println("");
+	    	    }
+	    	    
+	    	    pw.println(matrizI.length+"");
+	    	    
+	    	    for (int x=0; x < matrizI.length; x++) {
+	    	    	 pw.print("");
+	    	        for (int y=0; y < matrizI[x].length; y++) {
+	    	        	pw.print(matrizI[x][y] + " ");
+	    	          if (y!=matrizI[x].length) System.out.print(" ");
+	    	        }
+	    	        pw.println("");
+	    	    }
+	    	    
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        } finally {
@@ -589,18 +667,7 @@ public class Graph<E,T>{
 	           }
 	        }
 	}
-	
-//	public void cambiar(String [] cx, String [] cy){
-//		
-//		for(int x =0;x<cx.length;x++){
-//		cordeX[x]= Integer.parseInt(cx[x]);	
-//		}
-//		for(int y =0;y<cy.length;y++){
-//		cordeY[y]= Integer.parseInt(cy[y]);		
-//		}
-//	}
-	
-	
+		
 	public String[] getCordeX() {
 		return cordeX;
 	}

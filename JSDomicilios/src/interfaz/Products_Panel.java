@@ -162,6 +162,8 @@ public class Products_Panel extends JFrame implements ActionListener {
 				if(!(Cliente.equals(" "))){
 					setCliente(Cliente);
 					p.salir();
+					acumulado =0;
+					txt.setText("$  " +acumulado);
 				}
 				else{
 					JOptionPane.showMessageDialog(this, "Escriba un nombre");

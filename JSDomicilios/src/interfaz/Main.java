@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 import model.Domicilie;
 import model.Edge;
 import model.Graph;
+import model.Kruskal;
 import model.Matrices;
 import model.Deliver;
 import model.Pintar;
@@ -49,7 +51,7 @@ public class Main extends JFrame{
 		
 		add(datos,BorderLayout.EAST);
 		
-		graph = new Graph<Domicilie<Deliver>,String>(true);
+		graph = new Graph<Domicilie<Deliver>,String>(false);
 	}
 	
 	 public Graph<Domicilie<Deliver>, String> getGraph() {
@@ -61,11 +63,39 @@ public class Main extends JFrame{
 		 Main v = new Main();
 		 v.setVisible(true);
 		 
+//		 Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
+//		 Vertex<Domicilie<Deliver>,String> v2 = graph1.addVertex(new Domicilie<Deliver>(new Deliver("B")));
+//			
+//		 Vertex<Domicilie<Deliver>,String> v3 = graph1.addVertex(new Domicilie<Deliver>(new Deliver("C")));
+//		 Vertex<Domicilie<Deliver>,String> v4 = graph1.addVertex(new Domicilie<Deliver>(new Deliver("D")));
+//		
+//		 Vertex<Domicilie<Deliver>,String> v5 = graph1.addVertex(new Domicilie<Deliver>(new Deliver("E")));
+//		 
+//		 Vertex<Domicilie<Deliver>,String> v6 = graph1.addVertex(new Domicilie<Deliver>(new Deliver("F")));
+//		
+//		 Edge<Domicilie<Deliver>,String> e2[] = graph1.addEdge(v5, v3,null,27);
+//			
+//		 Edge<Domicilie<Deliver>,String> e3[] = graph1.addEdge(v3, v4,null,87);
+//			
+//		 Edge<Domicilie<Deliver>,String> e4[] = graph1.addEdge(v4, v6,null,32);
+//			
+//		 Kruskal<Domicilie<Deliver>,String> k = new Kruskal<Domicilie<Deliver>,String>();
+//			
+//		 Graph<Domicilie<Deliver>,String> graph2 = new Graph<Domicilie<Deliver>,String>(false) ;
+//		 
+//		 System.out.println(graph1.areAdjacent(v4, v3));
+			
+//		 graph2 = k.obtenerARM(graph1);
+//		
+//		 System.out.println(graph1);
+//		 System.out.println(graph2);
+//		 v.recorrerKruskal();
 
 	 }
 	
 	 public void showFrame(){
 		 productsPanel.setVisible(true);
+			
 	 }
 	 
 	 public Products_Panel getProductsPanel(){
@@ -128,16 +158,17 @@ public class Main extends JFrame{
 		return datos;
 	}
 	
-	public Vertex<Domicilie<Deliver>, String > inicial(){
-		Deliver d = new Deliver("<< Js_Domic >>");
-		Domicilie<Deliver> d1 = new Domicilie<Deliver>(d);
-		Vertex<Domicilie<Deliver>, String > v = new Vertex<Domicilie<Deliver>, String >(d1);
-		v = graph.addVertex(d1);
-		return v;
-	}
+//	public Vertex<Domicilie<Deliver>, String > inicial(){
+//		Deliver d = new Deliver("<< Js_Domic >>");
+//		Domicilie<Deliver> d1 = new Domicilie<Deliver>(d);
+//		Vertex<Domicilie<Deliver>, String > v = new Vertex<Domicilie<Deliver>, String >(d1);
+//		v = graph.addVertex(d1);
+//		return v;
+//	}
 	
 	public void release(){
 		city.R_paint();
+		
 	}
 	
 	public String nCliente (){
@@ -149,28 +180,19 @@ public class Main extends JFrame{
 	}
 	
 	public void añadirVertices(int tope){
-		
-		for (int j = 0; j <tope-1; j++){
-			Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(j)));
-			graph.addVertex(d);	
-		}
+			Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(tope)));
+			graph.addVertex(d);
 	}
 	
-	public void añadirAristas(int id,int id2,int tope){	
+	public void añadirAristas(int id,int id2,int ta){	
 		Vertex<Domicilie<Deliver>,String> v = null;
 		Vertex<Domicilie<Deliver>,String> v2 = null;	
 		Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(id)));		
 		Domicilie<Deliver> d2 = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(id2)));	
 		v = graph.addVertex(d);	
-		v2 =graph.addVertex(d2);
-		for (int j = 0; j < tope; j++) { 		
-			for (int k = 0; k < tope; k++) {     				
-				if(city.getArboles().getmAdyacencia(j, k) == 1){							
-					Edge<Domicilie<Deliver>,String> e1[] = graph.addEdge(v, v2,null,city.getArboles().getmCoeficiente(j, k));							
-				}			
+		v2 =graph.addVertex(d2);												
+		Edge<Domicilie<Deliver>,String> e1[] = graph.addEdge(v, v2,null,ta);
 		
-			}
-		}
 	}
 	
 
@@ -201,30 +223,15 @@ public class Main extends JFrame{
 				
 				city.getArboles().setmAdyacencia(m);
 				city.getArboles().setNombre(graph.getVertices());
-				city.getArboles().setCordeX(cx);;
-				city.getArboles().setCordeY(cy);;
+				city.getArboles().setCordeX(cx);
+				city.getArboles().setCordeY(cy);
+				city.getArboles().setmCoeficiente(graph.getmCoeficiente());
 				
-//				for (int x=0; x < m.length; x++) {
-//					for (int y=0; y < m[0].length; y++) {
-//						city.getArboles().getmAdyacencia()[x][y]=m[x][y];
-//					}
-//				}
-//				
-//				for (int x=0; x < m.length-1; x++) {
-//			    	city.getArboles().getNombre()[x]=graph.getVertices()[x];
-//				}
-//				
-//				for (int x=0; x < cx.length; x++) {
-//			    	city.getArboles().setCordeX(x, cx[x]);
-//				}
-//				
-//				for (int x=0; x < cy.length; x++) {
-//					city.getArboles().setCordeY(x, cy[x]);
-//				}
 				pintar(city.getArboles());
 				city.setTope(m.length-1);
-				
 				imprimir(m);
+				
+				System.out.println();
 				mostrarDatos();
 			}
 		}
@@ -253,7 +260,19 @@ public class Main extends JFrame{
 	        System.out.print("");
 	        for (int y=0; y < matriz[x].length; y++) {
 	          System.out.print(matriz[x][y]);
-	          if (y!=matriz[x].length-1) System.out.print(" ");
+	          if (y!=matriz[x].length) System.out.print(" ");
+	        }
+	        System.out.println("");
+	    }
+	    
+	    matriz = city.getArboles().getmCoeficiente();
+	    System.out.println(matriz.length+"");
+	    
+	    for (int x=0; x < matriz.length; x++) {
+	        System.out.print("");
+	        for (int y=0; y < matriz[x].length; y++) {
+	          System.out.print(matriz[x][y]);
+	          if (y!=matriz[x].length) System.out.print(" ");
 	        }
 	        System.out.println("");
 	    }
@@ -267,7 +286,33 @@ public class Main extends JFrame{
 					 Pintar.pintarLinea(city.getGraphics(),arboles.getCordeX(j),arboles.getCordeY(j), arboles.getCordeX(k), arboles.getCordeY(k),arboles.getmCoeficiente(j, k));
 			 }
 		 } 
-		 for (int j = 0; j < 50; j++)    
-			 Pintar.pintarCasita(city.getGraphics(), arboles.getCordeX(j),arboles.getCordeY(j),String.valueOf(arboles.getNombre(j))); 
-	 }
+		 for (int j = 0; j < 50; j++){    
+			 Pintar.clickSobreNodo(city.getGraphics(), arboles.getCordeX(j), arboles.getCordeY(j), null,Color.ORANGE);
+			 Pintar.pintarCasita(city.getGraphics(), arboles.getCordeX(j),arboles.getCordeY(j),String.valueOf(arboles.getNombre(j)));    
+		 }	 
+	}
+	
+	public void guardar(){
+		graph.escribir(city.getArboles().getmAdyacencia(), city.getArboles().getmCoeficiente(), city.getArboles().getNombre(), city.getArboles().getCordeX(), city.getArboles().getCordeY());
+	    JOptionPane.showMessageDialog(this, "Se Guardo Correctamente");
+	}
+	public void BFS(){
+		String m ="";
+		for(Vertex<Domicilie<Deliver>,String> v : graph.BFS()){
+			m += v +"\n";
+		}
+		datos.setDatos2(" -------- " + "BFS"+ " -------- " + "\n" + m);
+	}
+
+	public void DFS(){
+		String m ="";
+		for(Vertex<Domicilie<Deliver>,String> v : graph.DFS()){
+			m += v +"\n";
+		}
+		datos.setDatos2(" -------- " + "DFS"+ " -------- " + "\n" + m);
+	}
+
+	public void Prim() {
+		city.PintarPrim();
+	}
 }

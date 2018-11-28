@@ -12,7 +12,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 	
 	public final static String START="start";
 	public final static String CARGAR="cargar";
-	public final static String DISTANCE="distance";
+	public final static String GUARDAR="guardar";
 	public final static String ORDER="order";
 	private JButton butStart;
 	private JButton butUpload;
@@ -60,12 +60,12 @@ public class Options_Panel extends JPanel implements ActionListener{
 		repaint.setBackground(Color.WHITE);
 		repaint.addActionListener(this);
 		repaint.setActionCommand(REPAINT);
-		butDistance=new JButton("Lower distance");
+		butDistance=new JButton("Save");
 		panelBotones.add(butDistance);
 		butDistance.setFont(new Font("Kalinga", Font.PLAIN, 11));
 		butDistance.setBackground(Color.WHITE);
 		butDistance.addActionListener(this);
-		butDistance.setActionCommand(DISTANCE);
+		butDistance.setActionCommand(GUARDAR);
 		butUpload=new JButton("Load city");
 		panelBotones.add(butUpload);
 		butUpload.setFont(new Font("Kalinga", Font.PLAIN, 11));
@@ -128,13 +128,24 @@ public class Options_Panel extends JPanel implements ActionListener{
 		String comando=a.getActionCommand();
 		if(comando.equals(START)){
 			try{
-				String cliente = JOptionPane.showInputDialog(this, " Inserte:  \n " + "1: Dijkstra      2 : FloydWarsshall");
+				String cliente = JOptionPane.showInputDialog(this, " Inserte:  \n " + "1: Dijkstra      2: Kruskal      3: BFS      4: DFS      5: Prim");
 				if(cliente!=""){
 					if(cliente.equals("1")){
 						interfaz.recorrerDijkstra();
 					}
 					else if(cliente.equals("2")){
 						interfaz.recorrerKruskal();
+					}
+					
+					else if(cliente.equals("3")){
+						interfaz.BFS();;
+					}
+					
+					else if(cliente.equals("4")){
+						interfaz.DFS();;
+					}
+					else if(cliente.equals("5")){
+						interfaz.Prim();
 					}
 					else{
 						JOptionPane.showMessageDialog(this, "Solo se puede escribir 1 ò 2");
@@ -146,13 +157,14 @@ public class Options_Panel extends JPanel implements ActionListener{
 				}
 				catch(Exception ex){
 					ex.printStackTrace();
-					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
+					JOptionPane.showMessageDialog(this, "Debe ingresar datos");
 				}
 		}
 		else if(comando.equals(CARGAR)){
 			interfaz.cargar();
 			
-		}else if(comando.equals(DISTANCE)){
+		}else if(comando.equals(GUARDAR)){
+			interfaz.guardar();
 			
 		}else if(comando.equals(ORDER)){
 		 interfaz.showFrame();

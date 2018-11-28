@@ -28,7 +28,7 @@ public class City extends JPanel implements MouseListener{
 	public Main main;
 	
 	private Matrices arboles;
-	private int tope=1;  
+	private int tope=0;  
 	 
 	private int nodoFin;   
 	 
@@ -124,7 +124,7 @@ public class City extends JPanel implements MouseListener{
 					arboles.setmCoeficiente(id2, id,ta );	             				
 					arboles.setmCoeficiente(id, id2, ta);				
 					Pintar.pintarLinea(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id), arboles.getCordeX(id2), arboles.getCordeY(id2), ta); 	             				
-					main.añadirAristas(id,id2,tope);
+					main.añadirAristas(id,id2,ta);
 					Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id), arboles.getCordeY(id),String.valueOf(arboles.getNombre(id)));	             			
 					Pintar.pintarCasita(this.getGraphics(),arboles.getCordeX(id2), arboles.getCordeY(id2),String.valueOf(arboles.getNombre(id2)));
 					id=-1;	              
@@ -137,6 +137,7 @@ public class City extends JPanel implements MouseListener{
 			main.setCliente(tope);
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"Realize un pedido");
 		}
 	}
@@ -249,17 +250,28 @@ public class City extends JPanel implements MouseListener{
 	}
 	
 	public void PintarKruskal(){
-			
-			if(tope>2){
-			permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);         	         
-			nodoFin =  ingresarNodoOrigen("Ingrese ID Fin..","ID Fin No existe",tope);
-			Kruskal<Domicilie<Deliver>,String> k = new Kruskal<Domicilie<Deliver>,String>();
-			main.panelDatos().setDatos2(k.obtenerARM(main.getGraph()).toString());
+		Kruskal<Domicilie<Deliver>,String> k = new Kruskal<Domicilie<Deliver>,String>();
+		
+		Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
+		graph1 = k.obtenerARM(main.getGraph(),main.getGraph().vertices_array()[0]);
+		
+		main.panelDatos().setDatos2(" -------- " + "Kruskal"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + k.getAcumulado());
 		
 	}
+	
+	public void PintarPrim(){
+		Prim<Domicilie<Deliver>,String> p = new Prim<Domicilie<Deliver>,String>();
+		
+		Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
+		
+		graph1 = p.obtenerARM(main.getGraph(),main.getGraph().vertices_array()[0]);
+		
+		main.panelDatos().setDatos2(" -------- " + "Kruskal"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
+		
 	}
 	
 	public void R_paint(){
 		R_repaint(tope, arboles);
 	}
+	
 }
