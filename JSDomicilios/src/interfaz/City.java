@@ -268,7 +268,7 @@ public class City extends JPanel implements MouseListener{
 		
 		graph1 = p.obtenerARM(main.getGraph(),permanente);
 		
-		main.panelDatos().setDatos2(" -------- " + "Kruskal"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
+		main.panelDatos().setDatos2(" -------- " + "Prim"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
 		
 	}
 	
