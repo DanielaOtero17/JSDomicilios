@@ -172,8 +172,10 @@ public class City extends JPanel implements MouseListener{
 				JOptionPane.showMessageDialog(null,""+noExiste+"\nDebe de ingresar  un Nodo existente");	                  
 				nodoOrigen = ingresarNodoOrigen(nodoOrige,noExiste, tope);	            
 			}	        
-		}catch(Exception ex){	            
-			nodoOrigen = ingresarNodoOrigen(nodoOrige,noExiste,tope);	        
+		}catch(Exception ex){
+			if(tope!=0){
+				nodoOrigen = ingresarNodoOrigen(nodoOrige,noExiste,tope);
+			}
 		}	        
 		return nodoOrigen;
 	}          
@@ -251,9 +253,9 @@ public class City extends JPanel implements MouseListener{
 	
 	public void PintarKruskal(){
 		Kruskal<Domicilie<Deliver>,String> k = new Kruskal<Domicilie<Deliver>,String>();
-		
+		permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);	
 		Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
-		graph1 = k.obtenerARM(main.getGraph(),main.getGraph().vertices_array()[0]);
+		graph1 = k.obtenerARM(main.getGraph(),permanente);
 		
 		main.panelDatos().setDatos2(" -------- " + "Kruskal"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + k.getAcumulado());
 		
@@ -261,12 +263,12 @@ public class City extends JPanel implements MouseListener{
 	
 	public void PintarPrim(){
 		Prim<Domicilie<Deliver>,String> p = new Prim<Domicilie<Deliver>,String>();
-		
+		permanente = ingresarNodoOrigen("Ingrese ID Origen..","ID Origen No existe",tope);
 		Graph<Domicilie<Deliver>,String> graph1 = new Graph<Domicilie<Deliver>,String>(false) ;
 		
-		graph1 = p.obtenerARM(main.getGraph(),main.getGraph().vertices_array()[0]);
+		graph1 = p.obtenerARM(main.getGraph(),permanente);
 		
-		main.panelDatos().setDatos2(" -------- " + "Kruskal"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
+		main.panelDatos().setDatos2(" -------- " + "Prim"+ " -------- " + "\n" + graph1 + "\n" + " Acumulado = " + p.getAcumulado());
 		
 	}
 	
