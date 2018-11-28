@@ -17,7 +17,7 @@ private int acumulado =0;
 	}
 
 	@Override
-	public Graph<E, T> obtenerARM(Graph<E, T> G, Vertex<E, T> inicio) {
+	public Graph<E, T> obtenerARM(Graph<E, T> G, int inicio) {
 //		if((G.isConnected())){
 //        	throw new IllegalArgumentException("Error al generar arbol recubridor minimo: el grafo no es conexo.");
 //        }
@@ -37,11 +37,8 @@ private int acumulado =0;
             PriorityQueue<Edge<E,T>> aristas = new PriorityQueue<>();
             for (int i = 0; i < n - 1; i++) {
                 for (int j = i + 1; j < n; j++) {
-//                    if (G.areAdjacent(G.vertices_array()[i],G.vertices_array()[j])) {
                     	Edge<E,T> e = new Edge<>(G.vertices_array()[i], G.vertices_array()[j]);
                         aristas.add(e);
-                    
-//                    }
                 }
             }
             Edge<E,T>aristaPesoMin = null;
@@ -61,5 +58,6 @@ private int acumulado =0;
         return arbol;
 		
 	}
+	
 	
 }

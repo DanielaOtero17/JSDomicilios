@@ -10,7 +10,7 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
 	}
 
 	@Override
-    public Graph<E,T> obtenerARM(Graph<E,T> G,Vertex<E,T> inicio) throws IllegalArgumentException {
+    public Graph<E,T> obtenerARM(Graph<E,T> G,int inicio) throws IllegalArgumentException {
     	
 //        if((G.isConnected())){
 //        	throw new IllegalArgumentException("Error al generar arbol recubridor minimo: el grafo no es conexo.");
@@ -18,7 +18,7 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
         
         int n = G.vertices_array().length;
 
-        Graph<E,T> arbol = new Graph<E,T>(false);
+        Graph<E,T> arbol = new Graph<E,T>(true);
         
         for(int i =0;i<n;i++){
         	arbol.addVertex(G.vertices_array()[i].getData());
@@ -29,15 +29,13 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
        
         if (m > 0) {
             PriorityQueue<Edge<E,T>> aristas = new PriorityQueue<>(m);
-            for (int i = 0; i < n - 1; i++) {
+            for (int i = inicio; i < n +inicio - 1; i++) {
                 for (int j = i + 1; j < n; j++) {
-                    if (!G.areAdjacent(inicio,G.vertices_array()[j])) {
+                    if (G.areAdjacent(G.vertices_array()[i],G.vertices_array()[j])) {
                     	int peso =G.edges_array()[j].getWeight();
-                    	Edge<E,T> e = new Edge<>(inicio, G.vertices_array()[j]);
-                    	inicio =G.vertices_array()[i];
+                    	Edge<E,T> e = new Edge<>(G.vertices_array()[i], G.vertices_array()[j]);
                     	e.setWeight(peso);
                         aristas.add(e);
-                    
                     }
                 }
             }
@@ -51,9 +49,9 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
                 	arbol.addEdge(vOrigen,vDestino,null,aristaPesoMin.getWeight());                }
             }
         }
-        for(int i =0;i<arbol.edges_array().length;i++){
+        for(int i =0;i<arbol.edges_array().length-1;i++){
         	acumulado += arbol.edges_array()[i].getWeight();
-        	 System.out.println(acumulado/2);
+        	 System.out.println(acumulado);
         }
         return arbol;
     }
