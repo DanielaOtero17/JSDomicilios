@@ -18,7 +18,7 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
         
         int n = G.vertices_array().length;
 
-        Graph<E,T> arbol = new Graph<E,T>(false);
+        Graph<E,T> arbol = new Graph<E,T>(true);
         
         for(int i =0;i<n;i++){
         	arbol.addVertex(G.vertices_array()[i].getData());
@@ -50,9 +50,9 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
                 	arbol.addEdge(vOrigen,vDestino,null,aristaPesoMin.getWeight());                }
             }
         }
-        for(int i =0;i<arbol.edges_array().length;i++){
+        for(int i =0;i<arbol.edges_array().length-1;i++){
         	acumulado += arbol.edges_array()[i].getWeight();
-        	 System.out.println(acumulado/2);
+        	 System.out.println(acumulado);
         }
         return arbol;
     }
