@@ -236,9 +236,23 @@ public class Main extends JFrame{
 				city.setTope(m.length-1);
 				imprimir(m);
 				
-				System.out.println();
-				mostrarDatos();
+				System.out.println(graph);
+				
+				for(int i =0;i<graph.getmCoeficiente().length;i++){
+					for(int j =0;j<graph.getmCoeficiente()[0].length;j++){
+						if(graph.getmCoeficiente()[i][j]!=0){
+							añadirAristas(i, j, graph.getmCoeficiente()[i][j]);
+						}
+					}
+				}
+
+				for(int i =0;i<graph.getVertices().length;i++){
+					añadirVertices(i);
+				}
 			}
+			System.out.println();
+			mostrarDatos();
+			
 		}
 		}
 		catch(Exception e){
@@ -301,6 +315,7 @@ public class Main extends JFrame{
 	    JOptionPane.showMessageDialog(this, "Se Guardo Correctamente");
 	}
 	public void BFS(){
+		System.out.println(graph.getVertexList().getSize());
 		String m ="";
 		for(Vertex<Domicilie<Deliver>,String> v : graph.BFS()){
 			m += v +"\n";

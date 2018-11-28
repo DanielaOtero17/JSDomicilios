@@ -31,7 +31,7 @@ public class Kruskal<E,T> implements ArbolRecubridorMinimo<E,T> {
             PriorityQueue<Edge<E,T>> aristas = new PriorityQueue<>(m);
             for (int i = inicio; i < n +inicio - 1; i++) {
                 for (int j = i + 1; j < n; j++) {
-                    if (G.areAdjacent(G.vertices_array()[i],G.vertices_array()[j])) {
+                    if (!G.areAdjacent(G.vertices_array()[i],G.vertices_array()[j])) {
                     	int peso =G.edges_array()[j].getWeight();
                     	Edge<E,T> e = new Edge<>(G.vertices_array()[i], G.vertices_array()[j]);
                     	e.setWeight(peso);
