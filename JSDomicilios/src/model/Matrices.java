@@ -14,7 +14,7 @@ public class Matrices {
 
    private int [] cordeY ;
    private String [] nombre;
-//   private int [] enArbol;
+   private int [] enArbol;
    
    public Matrices(){
 	   mCoeficiente = new int [51][51];
@@ -22,7 +22,7 @@ public class Matrices {
 	   cordeX  = new int [51];
 	   cordeY = new int [51];
 	   nombre = new String [51];
-//	   enArbol  = null;
+	   enArbol  = null;
 	   
 //	   setCordeX(0,309);	              					
 //	   setCordeY(0,223);
@@ -49,9 +49,9 @@ public class Matrices {
         return nombre[i];
     }
 
-//    public int getEnArbol(int i) {
-//        return enArbol[i];
-//    }
+    public int getEnArbol(int i) {
+        return enArbol[i];
+    }
 
     public void setmCoeficiente(int i,int j ,int mCoeficiente) {
         this.mCoeficiente[i][j] = mCoeficiente;
@@ -73,12 +73,12 @@ public class Matrices {
         this.nombre[i] = nombre;
     }
 
-//    public void setEnArbol(int i,int enArbol) {
-//        this.enArbol[i] = enArbol;
-//    }
-//    public void crearEnArbol(int i){
-//       enArbol = new int [i]; 
-//    }
+    public void setEnArbol(int i,int enArbol) {
+        this.enArbol[i] = enArbol;
+    }
+    public void crearEnArbol(int i){
+       enArbol = new int [i]; 
+    }
     
     
 

@@ -210,6 +210,7 @@ public class Main extends JFrame{
 			File archivo = fc.getSelectedFile();
 			if (archivo != null) {
 				File file = new File("data/" + archivo.getName());
+				renovate();
 				
 				int [][] m = graph.cargarMatriz(file);
 				
@@ -236,7 +237,7 @@ public class Main extends JFrame{
 				city.setTope(m.length-1);
 				imprimir(m);
 				
-				System.out.println(graph);
+//				System.out.println(graph);
 				
 				for(int i =0;i<graph.getmCoeficiente().length;i++){
 					for(int j =0;j<graph.getmCoeficiente()[0].length;j++){
@@ -333,5 +334,21 @@ public class Main extends JFrame{
 
 	public void Prim() {
 		city.PintarPrim();
+	}
+	
+	public void renovate(){
+		Graph<Domicilie<Deliver>,String> Ngraph = new Graph<Domicilie<Deliver>,String>(false) ;
+		graph=Ngraph;
+		
+		Matrices nM = new Matrices();
+//		city.getArboles().setCordeX(nM.getCordeX());
+//		city.getArboles().setCordeY(nM.getCordeY());
+//		city.getArboles().setmAdyacencia(nM.getmAdyacencia());
+//		city.getArboles().setmCoeficiente(nM.getmCoeficiente());
+//		city.getArboles().setNombre(nM.getNombre());
+		
+		city.setArboles(nM);
+		release();
+		
 	}
 }
