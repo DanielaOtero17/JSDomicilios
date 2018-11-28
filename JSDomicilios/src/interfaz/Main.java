@@ -316,7 +316,6 @@ public class Main extends JFrame{
 	    JOptionPane.showMessageDialog(this, "Se Guardo Correctamente");
 	}
 	public void BFS(){
-		System.out.println(graph.getVertexList().getSize());
 		String m ="";
 		for(Vertex<Domicilie<Deliver>,String> v : graph.BFS()){
 			m += v +"\n";

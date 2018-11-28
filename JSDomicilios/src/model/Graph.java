@@ -489,10 +489,10 @@ public class Graph<E,T>{
 	
 	
 	public String toString(){
-		String output = "         Vertices:\n";
-		for(Vertex<E,T> v : vertices_array())
-			output += String.format("%s ", v.toString())+ "\n";
-//		String output = "";
+//		String output = "         Vertices:\n";
+//		for(Vertex<E,T> v : vertices_array())
+//			output += String.format("%s ", v.toString())+ "\n";
+		String output = "";
 		output += "            Edges:\n";
 		
 		for(Edge<E,T> e : edges_array()){
