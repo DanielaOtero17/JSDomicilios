@@ -14,7 +14,7 @@ public class Matrices {
 
    private int [] cordeY ;
    private String [] nombre;
-   private int [] enArbol;
+//   private int [] enArbol;
    
    public Matrices(){
 	   mCoeficiente = new int [51][51];
@@ -22,11 +22,11 @@ public class Matrices {
 	   cordeX  = new int [51];
 	   cordeY = new int [51];
 	   nombre = new String [51];
-	   enArbol  = null;
+//	   enArbol  = null;
 	   
-	   setCordeX(0,309);	              					
-	   setCordeY(0,223);
-	   setNombre(0, "Js_Domic");
+//	   setCordeX(0,309);	              					
+//	   setCordeY(0,223);
+//	   setNombre(0, "Js_Domic");
     }
 
 	public int getmCoeficiente(int i, int j ) {
@@ -49,9 +49,9 @@ public class Matrices {
         return nombre[i];
     }
 
-    public int getEnArbol(int i) {
-        return enArbol[i];
-    }
+//    public int getEnArbol(int i) {
+//        return enArbol[i];
+//    }
 
     public void setmCoeficiente(int i,int j ,int mCoeficiente) {
         this.mCoeficiente[i][j] = mCoeficiente;
@@ -73,30 +73,60 @@ public class Matrices {
         this.nombre[i] = nombre;
     }
 
-    public void setEnArbol(int i,int enArbol) {
-        this.enArbol[i] = enArbol;
-    }
-    public void crearEnArbol(int i){
-       enArbol = new int [i]; 
-    }
+//    public void setEnArbol(int i,int enArbol) {
+//        this.enArbol[i] = enArbol;
+//    }
+//    public void crearEnArbol(int i){
+//       enArbol = new int [i]; 
+//    }
     
-    public int[][] getmAdyacencia() {
-    	return mAdyacencia;
-    }
     
-    public int[][] getmIncidencia() {
-    	return mCoeficiente;
-    }
 
-    public void setmAdyacencia(int[][] mAdyacencia) {
-    	this.mAdyacencia = mAdyacencia;
-    }
+	public int[][] getmCoeficiente() {
+		return mCoeficiente;
+	}
+
+	public void setmCoeficiente(int[][] mCoeficiente) {
+		this.mCoeficiente = mCoeficiente;
+	}
+
+	public int[][] getmAdyacencia() {
+		return mAdyacencia;
+	}
+
+	public void setmAdyacencia(int[][] mAdyacencia) {
+		this.mAdyacencia = mAdyacencia;
+	}
+
+	public int[] getCordeX() {
+		return cordeX;
+	}
+
+	public void setCordeX(int[] cordeX) {
+		this.cordeX = cordeX;
+	}
+
+	public int[] getCordeY() {
+		return cordeY;
+	}
+
+	public void setCordeY(int[] cordeY) {
+		this.cordeY = cordeY;
+	}
+
+	public String[] getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String[] nombre) {
+		this.nombre = nombre;
+	}
 
 	@Override
 	public String toString() {
 		int contador =0;
 		String m ="ID " +"        " +  "Nombre " + "\n";
-		while(nombre[contador]!=null){
+		while(contador<50){
 			m += contador + "    " + nombre[contador] + "\n";
 			contador++; 
 		}

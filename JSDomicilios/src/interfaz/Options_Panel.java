@@ -11,11 +11,11 @@ public class Options_Panel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
 	public final static String START="start";
-	public final static String TRAVEL="travel";
+	public final static String CARGAR="cargar";
 	public final static String DISTANCE="distance";
 	public final static String ORDER="order";
 	private JButton butStart;
-	private JButton butTraffic;
+	private JButton butUpload;
 	private JButton butDistance;
 	private JButton butOrder;
 	private Main interfaz;
@@ -66,12 +66,12 @@ public class Options_Panel extends JPanel implements ActionListener{
 		butDistance.setBackground(Color.WHITE);
 		butDistance.addActionListener(this);
 		butDistance.setActionCommand(DISTANCE);
-		butTraffic=new JButton("Lower traffic");
-		panelBotones.add(butTraffic);
-		butTraffic.setFont(new Font("Kalinga", Font.PLAIN, 11));
-		butTraffic.setBackground(Color.WHITE);
-		butTraffic.addActionListener(this);
-		butTraffic.setActionCommand(TRAVEL);
+		butUpload=new JButton("Load city");
+		panelBotones.add(butUpload);
+		butUpload.setFont(new Font("Kalinga", Font.PLAIN, 11));
+		butUpload.setBackground(Color.WHITE);
+		butUpload.addActionListener(this);
+		butUpload.setActionCommand(CARGAR);
 		panelBotones.setBackground(Color.WHITE);
 		
 		panelBotones.add(new JLabel());
@@ -149,8 +149,8 @@ public class Options_Panel extends JPanel implements ActionListener{
 					JOptionPane.showMessageDialog(this, "Thanks ...¡¡");
 				}
 		}
-		else if(comando.equals(TRAVEL)){
-			
+		else if(comando.equals(CARGAR)){
+			interfaz.cargar();
 			
 		}else if(comando.equals(DISTANCE)){
 			

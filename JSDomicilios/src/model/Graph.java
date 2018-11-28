@@ -3,6 +3,8 @@ package model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -21,6 +23,11 @@ public class Graph<E,T>{
 	private boolean isCyclic;
 	private boolean isConnected;
 	private int connectedComponents;
+	
+	private String[] vertices ;
+	private String[] cordeX ;
+
+	private String[] cordeY ;
 	
 	private int unique_id = 0;
 	
@@ -509,7 +516,7 @@ public class Graph<E,T>{
 	
 	
 	public int[][] cargarMatriz(File archivo)throws Exception {
-		FileReader reader = new FileReader("data/" + archivo);
+		FileReader reader = new FileReader(archivo);
 		BufferedReader leitor = new BufferedReader(reader);
 
 		String line;
@@ -517,6 +524,11 @@ public class Graph<E,T>{
 		Integer columna;
 		
 		Integer numeroDeVertices = Integer.parseInt(leitor.readLine().trim());
+		
+		vertices = (line = leitor.readLine()).split(" ");
+		
+		cordeX = (line = leitor.readLine()).split(" "); 
+		cordeY = (line = leitor.readLine()).split(" ");
 		
 		int[][] matrizDeAdjacencia = new int[numeroDeVertices][numeroDeVertices];
 		
@@ -540,5 +552,60 @@ public class Graph<E,T>{
 			fila++;
 		}
 		return matrizDeAdjacencia;
+	}
+
+	public String[] getVertices() {
+		return vertices;
+	}
+	
+	public void escribir(int[][] matriz, String[] nombres, int [] cordX, int[] cordY ) {
+		 FileWriter fichero = null;
+	        PrintWriter pw = null;
+	        try
+	        {
+	            fichero = new FileWriter("data/Salida.txt");
+	            pw = new PrintWriter(fichero);
+	            
+	            for (int x=0; x < matriz.length; x++) {
+	            	 pw.print("|");
+	    	        for (int y=0; y < matriz[x].length; y++) {
+	    	        	pw.print(matriz[x][y]);
+	    	          if (y!=matriz[x].length-1) pw.print(" ");
+	    	        }
+	    	        pw.println("|");
+	    	    }
+	            pw.println(matriz.length-1);
+
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           try {
+	        	   
+	           if (null != fichero)
+	              fichero.close();
+	           } catch (Exception e2) {
+	              e2.printStackTrace();
+	           }
+	        }
+	}
+	
+//	public void cambiar(String [] cx, String [] cy){
+//		
+//		for(int x =0;x<cx.length;x++){
+//		cordeX[x]= Integer.parseInt(cx[x]);	
+//		}
+//		for(int y =0;y<cy.length;y++){
+//		cordeY[y]= Integer.parseInt(cy[y]);		
+//		}
+//	}
+	
+	
+	public String[] getCordeX() {
+		return cordeX;
+	}
+
+	public String[] getCordeY() {
+		return cordeY;
 	}
 }
