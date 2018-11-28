@@ -157,7 +157,7 @@ public class Options_Panel extends JPanel implements ActionListener{
 				}
 				catch(Exception ex){
 					ex.printStackTrace();
-					JOptionPane.showMessageDialog(this, "Debe ingresar datos");
+					JOptionPane.showMessageDialog(this, "Algo fallo");
 				}
 		}
 		else if(comando.equals(CARGAR)){

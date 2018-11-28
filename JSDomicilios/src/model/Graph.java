@@ -459,6 +459,17 @@ public class Graph<E,T>{
 		return false;
 	}
 	
+
+	public boolean contain(Edge<E, T> e){
+		
+		for(int i =0;i<edges_array().length;i++){
+			if(e.position.getData().equals(edges_array()[i].getPosition().getData())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean isEmpty(){
 		Iterator<Vertex<E,T>> iter = vertices();
 		while(iter.hasNext()){
@@ -498,14 +509,12 @@ public class Graph<E,T>{
         for (int i = 0; i < visitado.length; i++) {
             visitado[i] = false;
         }
-        int contador =0;
         Vertex<E,T> v =idDestino;
         Q.add(v);
         visitado[idDestino.getID()] = true;
         Vertex<E,T> t = null;
         while (!Q.isEmpty() && (t = Q.get(0)).getID() != idOrigen.getID()) {
             Q.remove(t);
-            contador++;
             
             for (Vertex<E,T> u : vertices_array()) {
                 if (!visitado[u.getID()]) {

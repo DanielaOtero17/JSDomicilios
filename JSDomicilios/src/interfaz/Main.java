@@ -180,8 +180,10 @@ public class Main extends JFrame{
 	}
 	
 	public void añadirVertices(int tope){
-			Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(tope)));
-			graph.addVertex(d);
+		Vertex<Domicilie<Deliver>,String> v = null;
+		Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(tope)));
+		v = graph.addVertex(d);
+		v.setID(tope);
 	}
 	
 	public void añadirAristas(int id,int id2,int ta){	
@@ -190,7 +192,10 @@ public class Main extends JFrame{
 		Domicilie<Deliver> d = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(id)));		
 		Domicilie<Deliver> d2 = new Domicilie<Deliver>(new Deliver(city.getArboles().getNombre(id2)));	
 		v = graph.addVertex(d);	
-		v2 =graph.addVertex(d2);												
+		v2 =graph.addVertex(d2);
+		v.setID(id);
+		v2.setID(id2);
+		
 		Edge<Domicilie<Deliver>,String> e1[] = graph.addEdge(v, v2,null,ta);
 		
 	}
@@ -237,7 +242,6 @@ public class Main extends JFrame{
 		}
 		}
 		catch(Exception e){
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(this,"Ocurrio algun error");
 		}
 	}
