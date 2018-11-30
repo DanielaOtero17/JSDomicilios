@@ -257,6 +257,7 @@ public class Main extends JFrame{
 		}
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(this,"Ocurrio algun error");
 		}
 	}

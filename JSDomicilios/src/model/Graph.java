@@ -638,7 +638,7 @@ public class Graph<E,T>{
 	            fichero = new FileWriter(new File("data/" +"Entregas " + año +"-"+ mes+"-"+ dia + "_" + hora +"."+ minuto + ".txt"));
 	            pw = new PrintWriter(fichero);
 	            
-	            pw.print(matrizA.length+"");
+	            pw.println(matrizA.length+"");
 	    		for (int x=0; x < nombres.length; x++) {
 	    			pw.print(nombres[x]+ " ");
 	    	    }
